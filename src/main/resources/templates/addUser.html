@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Добавить нового пользователя</title>
+</head>
+<body>
+<form action="/admin/add" method="post">
+    <input required type="text" th:name="name" placeholder="имя">
+    <input required type="text" th:name="password" placeholder="пароль">
+    <input required type="text" th:name="money" placeholder="деньги">
+
+     <p>  <input id="role1" name="role_id" type="checkbox" value="ROLE_ADMIN" />
+        <label for="role1">ROLE_ADMIN</label></p>
+
+    <p></p><input id="role2" name="role_id" type="checkbox" value="ROLE_USER" />
+    <label for="role2">ROLE_USER</label></p>
+
+
+    <input type="submit" value="Сохранить">
+</form>
+
+<!--<p th:text= "${AddUserException}"></p>-->
+<p th:text= "${NumberFormatException}"></p>
+<a th:href="@{/logout}">Logout</a>
+
+</body>
+</html>

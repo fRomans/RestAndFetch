@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <title>UserView</title>
+</head>
+<body>
+<p>Информация о пользователе:</p><br>
+
+<p> ИМЯ:<h1 th:text="${user22.getUsername()}"></h1></p>
+<p> ПРАВА:<h1 th:text="${user22.getAuthorities()}"></h1></p>
+
+<a th:href="@{/logout}">Logout</a>
+
+</body>
+</html>
