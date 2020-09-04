@@ -10,9 +10,20 @@
 </head>
 <body>
 <form action="/admin/add" method="post">
-    <input required type="text" th:name="name" placeholder="имя">
-    <input required type="text" th:name="password" placeholder="пароль">
-    <input required type="text" th:name="money" placeholder="деньги">
+    <div class=”form-group”>
+        <label class="col-md-2>Name</label>
+        <input required type="text" th:name="name" placeholder="имя" class="form-control col-md-10">
+    </div>
+    <div class=”form-group”>
+        <label class="col-md-2>Password</label>
+        <input required type="text" th:name="password" placeholder="пароль" class="form-control col-md-10">
+    </div>
+    <div class=”form-group”>
+        <label class="col-md-2">Money</label>
+        <input required type="text" th:name="money" placeholder="деньги" class="form-control col-md-10">
+    </div>
+
+
 
      <p>  <input id="role1" name="role_id" type="checkbox" value="ROLE_ADMIN" />
         <label for="role1">ROLE_ADMIN</label></p>
