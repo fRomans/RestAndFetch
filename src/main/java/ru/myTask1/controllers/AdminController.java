@@ -74,8 +74,9 @@ public class AdminController extends HttpServlet {
 
     @RequestMapping(value = "/update", method = RequestMethod.GET)
     public String getPage(@RequestParam(value = "updataId") Long id, Model model) {
-        boolean adminTrue;
-        boolean userTrue;
+        boolean adminTrue = false;
+        boolean userTrue = false;
+        boolean adminUserTrue ;
         User user = userRepos.findById(id).get();
         for (Role role : user.getAuthorities()){
             if (role.getAuthority().equals("ROLE_ADMIN")) {
@@ -85,6 +86,10 @@ public class AdminController extends HttpServlet {
                 userTrue = true;
                 model.addAttribute("userTrueAttr", userTrue);
             }
+        }
+        if (adminTrue & userTrue){
+            adminUserTrue = true;
+            model.addAttribute("adminuserTrueAttr", adminUserTrue);
         }
         model.addAttribute("user", user);
         return "updateUser";
