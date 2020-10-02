@@ -92,7 +92,7 @@ public class AdminController extends HttpServlet {
             model.addAttribute("adminuserTrueAttr", adminUserTrue);
         }
         model.addAttribute("user", user);
-        return "updateUser";
+        return "showUsers";
     }
 
 
