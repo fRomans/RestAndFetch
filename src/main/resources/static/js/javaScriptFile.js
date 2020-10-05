@@ -1,5 +1,3 @@
-
-
 $('#ModalEdit').on('show.bs.modal', function (event) {
     // var elementId = $(event.relatedTarget).data('id');
     var elementName = $(event.relatedTarget).data('name');
@@ -10,16 +8,18 @@ $('#ModalEdit').on('show.bs.modal', function (event) {
     var elementAuthorities = $(event.relatedTarget).data('authorities');
 
 
-// if (elementAuthorities==="ROLE_ADMIN"){
-//     $("#role1").html(elementAuthorities);
-// }else if (elementAuthorities==="ROLE_USER"){
-//     $("#role2").html(elementAuthorities);
-// }else if (elementAuthorities==="ROLE_ADMIN, ROLE_USER" ){
-//     $("#role3").html(elementAuthorities);
-// }
+    if (elementAuthorities === "[ROLE_ADMIN, ROLE_USER]") {
+        $('#select option[value="ROLE_ADMIN,ROLE_USER"]').prop('selected', true);
+    } else if (elementAuthorities === "[ROLE_USER]") {
+        $('#select option[value="ROLE_USER"]').prop('selected', true);
 
-    $("#inputName").html("dsadaddadadsad"+elementName);
-    $("#inputPassword").html(elementPassword);
-    $("#inputMoney").html(elementMoney);
+    } else if (elementAuthorities === "[ROLE_ADMIN]") {
+        $('#select option[value="ROLE_ADMIN"]').prop('selected', true);
+    }
+
+    $("#inputName").val(elementName);
+
+    // $("#inputPassword").val(elementPassword); не надо выводить пароль
+    $("#inputMoney").val(elementMoney);
 });
 

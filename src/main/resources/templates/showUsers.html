@@ -65,7 +65,7 @@
                                         <form action="/admin/update" method="post">
 
                                             <input type="hidden" th:name="updataId" th:value="${user.getId()}">
-                                            <div class="form-group">
+                                            <div class="form-group" >
                                                 <div class="row">
                                                     <div class="col-md-4"></div>
                                                     <div class="col-md-4">
@@ -73,8 +73,10 @@
                                                     </div>
                                                     <div class="col-md-4"></div>
                                                 </div >
-                                                <input type="text" th:name="name" placeholder="имя" id="inputName"
-                                                       class="form-control">
+                                                <div ></div>
+
+                                                <input type="text" th:name="name" placeholder="имя"
+                                                       class="form-control" id="inputName" >
 
                                             </div>
 
@@ -109,12 +111,14 @@
                                                     </div>
                                                     <div class="col-md-4"></div>
                                                 </div>
-                                                <select class="form-control" name="role" id="inputAuthorities">
-                                                    <option id="role1" th:selected="${adminTrueAttr}" value="ROLE_ADMIN">ROLE_ADMIN
+                                                <select class="form-control" name="role" id="select">
+                                                    <option  value="ROLE_ADMIN">
+                                                        ROLE_ADMIN
                                                     </option>
-                                                    <option id="role2" th:selected="${userTrueAttr}" value="ROLE_USER">ROLE_USER
+                                                    <option  value="ROLE_USER">
+                                                        ROLE_USER
                                                     </option>
-                                                    <option id="role3" th:selected="${adminuserTrueAttr}" value="ROLE_ADMIN,ROLE_USER">
+                                                    <option  value="ROLE_ADMIN,ROLE_USER">
                                                         ROLE_ADMIN,ROLE_USER
                                                     </option>
                                                 </select>
