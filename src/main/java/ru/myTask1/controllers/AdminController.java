@@ -72,34 +72,34 @@ public class AdminController extends HttpServlet {
         return "redirect:/admin";
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.GET)
-    public String getPage(@RequestParam(value = "updataId") Long id, Model model) {
-        boolean adminTrue = false;
-        boolean userTrue = false;
-        boolean adminUserTrue ;
-        User user = userRepos.findById(id).get();
-        for (Role role : user.getAuthorities()){
-            if (role.getAuthority().equals("ROLE_ADMIN")) {
-                adminTrue = true;
-                model.addAttribute("adminTrueAttr", adminTrue);
-            } else if (role.getAuthority().equals("ROLE_USER")) {
-                userTrue = true;
-                model.addAttribute("userTrueAttr", userTrue);
-            }
-        }
-        if (adminTrue & userTrue){
-            adminUserTrue = true;
-            model.addAttribute("adminuserTrueAttr", adminUserTrue);
-        }
-        model.addAttribute("user", user);
-        return "showUsers";
-    }
+//    @RequestMapping(value = "/update", method = RequestMethod.GET)
+//    public String getPage(@RequestParam(value = "updataId") Long id, Model model) {
+//        boolean adminTrue = false;
+//        boolean userTrue = false;
+//        boolean adminUserTrue ;
+//        User user = userRepos.findById(id).get();
+//        for (Role role : user.getAuthorities()){
+//            if (role.getAuthority().equals("ROLE_ADMIN")) {
+//                adminTrue = true;
+//                model.addAttribute("adminTrueAttr", adminTrue);
+//            } else if (role.getAuthority().equals("ROLE_USER")) {
+//                userTrue = true;
+//                model.addAttribute("userTrueAttr", userTrue);
+//            }
+//        }
+//        if (adminTrue & userTrue){
+//            adminUserTrue = true;
+//            model.addAttribute("adminuserTrueAttr", adminUserTrue);
+//        }
+//        model.addAttribute("user", user);
+//        return "showUsers";
+//    }
 
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String getUpdateUser(@ModelAttribute User user, @RequestParam Set<Role> role) {
+    public String getUpdateUser(@RequestParam(value = "updataId") Long id,@ModelAttribute User user, @RequestParam Set<Role> role) {
 
-        User userUpdate = userRepos.findById(user.getId()).get();
+        User userUpdate = userRepos.findById(id).get();
         userUpdate.setName(user.getUsername());
         if (!user.getPassword().equals("")) {
             userUpdate.setPassword(passwordEncoder.encode(user.getPassword()));
