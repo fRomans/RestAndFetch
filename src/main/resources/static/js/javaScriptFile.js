@@ -29,9 +29,9 @@ $('#ModalDelete').on('show.bs.modal', function Delete(event) {
     var elementMoney = $(event.relatedTarget).data('money');
     var elementAuthorities = $(event.relatedTarget).data('authorities');
 
-    $("#inputName").val(elementName);
-    $("#inputId").val(elementId);
-    $("#inputMoney").val(elementMoney);
+    $("#inputNameDelete").val(elementName);
+    $("#inputIdDelete").val(elementId);
+    $("#inputMoneyDelete").val(elementMoney);
     $("#selectDelete").val(elementAuthorities);
 });
 

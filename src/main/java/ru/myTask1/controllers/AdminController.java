@@ -58,12 +58,12 @@ public class AdminController extends HttpServlet {
         return "redirect:/admin";//todo   привести  к такому виду!!!/
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.GET)
-    public String getDeletePage(@RequestParam(value = "deleteId") Long id, Model model) {
-        User user = userRepos.findById(id).get();
-        model.addAttribute("user", user);
-        return "deleteUser";
-    }
+//    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+//    public String getDeletePage(@RequestParam(value = "deleteId") Long id, Model model) {
+//        User user = userRepos.findById(id).get();
+//        model.addAttribute("user", user);
+//        return "deleteUser";
+//    }
 
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
