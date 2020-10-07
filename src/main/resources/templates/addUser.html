@@ -1,104 +1,97 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!--<!DOCTYPE html>-->
+<!--<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="utf-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>Добавить нового пользователя</title>
-</head>
-<body>
-<div class="row">
-    <div class="col-md-5"></div>
-    <div class="col-md-2">
-        <form action="/admin/add" method="post">
+<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"-->
+<!--          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
+<!--    <title>Добавить нового пользователя</title>-->
+<!--</head>-->
+<!--<body>-->
 
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-4"></div>
-                    <div class="col-md-4">
-                        <label class="control-label">Name</label>
-                    </div>
-                    <div class="col-md-4"></div>
-                </div>
-                <input required type="text" th:name="name" placeholder="имя" class="form-control">
-            </div>
+<!--<div class="row">-->
+<!--    <div class="col-md-5"></div>-->
+<!--    <div class="col-md-2">-->
+<!--        <form action="/admin/add" method="post">-->
 
-            <div class=”form-group”>
-                <div class="row">
-                    <div class="col-md-4"></div>
-                    <div class="col-md-4">
-                        <label class="control-label">Password</label>
-                    </div>
-                    <div class="col-md-4"></div>
-                </div>
-                <input required type="text" th:name="password" placeholder="пароль" class="form-control">
-            </div>
+<!--            <div class="form-group">-->
+<!--                <div class="row">-->
+<!--                    <div class="col-md-4"></div>-->
+<!--                    <div class="col-md-4">-->
+<!--                        <label class="control-label">Name</label>-->
+<!--                    </div>-->
+<!--                    <div class="col-md-4"></div>-->
+<!--                </div>-->
+<!--                <input required type="text" th:name="name" placeholder="имя" class="form-control">-->
+<!--            </div>-->
 
-            <div class=”form-group”>
-                <div class="row">
-                    <div class="col-md-4"></div>
-                    <div class="col-md-4">
-                        <label class="control-label">Money</label>
-                    </div>
-                    <div class="col-md-4"></div>
-                </div>
-                <input required type="text" th:name="money" placeholder="деньги" class="form-control">
-            </div>
+<!--            <div class=”form-group”>-->
+<!--                <div class="row">-->
+<!--                    <div class="col-md-4"></div>-->
+<!--                    <div class="col-md-4">-->
+<!--                        <label class="control-label">Password</label>-->
+<!--                    </div>-->
+<!--                    <div class="col-md-4"></div>-->
+<!--                </div>-->
+<!--                <input required type="text" th:name="password" placeholder="пароль" class="form-control">-->
+<!--            </div>-->
 
-            <div class=”form-group”>
-                <div class="row">
-                    <div class="col-md-4"></div>
-                    <div class="col-md-4">
-                        <label class="control-label">Role</label>
-                    </div>
-                    <div class="col-md-4"></div>
-                </div>
-                <select class="form-control" name="role_id">
-                    <option id="role1" value="ROLE_ADMIN">ROLE_ADMIN</option>
-                    <option id="role2" value="ROLE_USER">ROLE_USER</option>
-                    <option id="role3" value="ROLE_ADMIN,ROLE_USER">ROLE_ADMIN,ROLE_USER</option>
-                </select>
-            </div>
+<!--            <div class=”form-group”>-->
+<!--                <div class="row">-->
+<!--                    <div class="col-md-4"></div>-->
+<!--                    <div class="col-md-4">-->
+<!--                        <label class="control-label">Money</label>-->
+<!--                    </div>-->
+<!--                    <div class="col-md-4"></div>-->
+<!--                </div>-->
+<!--                <input required type="text" th:name="money" placeholder="деньги" class="form-control">-->
+<!--            </div>-->
 
+<!--            <div class=”form-group”>-->
+<!--                <div class="row">-->
+<!--                    <div class="col-md-4"></div>-->
+<!--                    <div class="col-md-4">-->
+<!--                        <label class="control-label">Role</label>-->
+<!--                    </div>-->
+<!--                    <div class="col-md-4"></div>-->
+<!--                </div>-->
+<!--                <select class="form-control" name="role_id">-->
+<!--                    <option id="role1" value="ROLE_ADMIN">ROLE_ADMIN</option>-->
+<!--                    <option id="role2" value="ROLE_USER">ROLE_USER</option>-->
+<!--                    <option id="role3" value="ROLE_ADMIN,ROLE_USER">ROLE_ADMIN,ROLE_USER</option>-->
+<!--                </select>-->
+<!--            </div>-->
 
-            <!--     <p>  <input id="role1" name="role_id" type="checkbox" value="ROLE_ADMIN" />-->
-            <!--        <label for="role1">ROLE_ADMIN</label></p>-->
-
-            <!--    <p></p><input id="role2" name="role_id" type="checkbox" value="ROLE_USER" />-->
-            <!--    <label for="role2">ROLE_USER</label></p>-->
-
-
-            <div class="form-group"></div>
-                <div class="row">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-9">
-                        <button type="submit" class="btn btn-success btn-block"><h8>Add new user</h8></button>
-                    </div>
-                    <div class="col-md-2"></div>
-                </div>
+<!--            <div class="form-group"></div>-->
+<!--                <div class="row">-->
+<!--                    <div class="col-md-1"></div>-->
+<!--                    <div class="col-md-9">-->
+<!--                        <button type="submit" class="btn btn-success btn-block"><h8>Add new user</h8></button>-->
+<!--                    </div>-->
+<!--                    <div class="col-md-2"></div>-->
+<!--                </div>-->
 
 
-        </form>
-    </div>
-    <div class="col-md-5"></div>
-</div>
+<!--        </form>-->
+<!--    </div>-->
+<!--    <div class="col-md-5"></div>-->
+<!--</div>-->
 
-<!--<p th:text= "${AddUserException}"></p>-->
-<p th:text="${NumberFormatException}"></p>
-<a th:href="@{/logout}">Logout</a>
+<!--&lt;!&ndash;<p th:text= "${AddUserException}"></p>&ndash;&gt;-->
+<!--<p th:text="${NumberFormatException}"></p>-->
+<!--<a th:href="@{/logout}">Logout</a>-->
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+<!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"-->
+<!--        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"-->
+<!--        crossorigin="anonymous"></script>-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"-->
+<!--        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"-->
+<!--        crossorigin="anonymous"></script>-->
+<!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"-->
+<!--        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"-->
+<!--        crossorigin="anonymous"></script>-->
 
-</body>
-</html>
+<!--</body>-->
+<!--</html>-->
