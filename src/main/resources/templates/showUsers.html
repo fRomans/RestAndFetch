@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>
-        .divTable {
+        .divTable,#addDiv  {
             margin-top: 15px;
             margin-bottom: 15px;
             margin-right: 15px;
@@ -21,6 +21,7 @@
 
             background-color: #ffffff
         }
+
 
         #idRow1 {
             height: 100vh;
@@ -312,7 +313,7 @@
 
             <div role="tabpanel" class="tab-pane fade" id="addUser">
                 <h6>Add new user</h6>
-                <div class="row">
+                <div class="row" id="addDiv">
                     <div class="col-md-5"></div>
                     <div class="col-md-2">
                         <form action="/admin/add" method="post">
