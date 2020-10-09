@@ -35,3 +35,5 @@ $('#ModalDelete').on('show.bs.modal', function Delete(event) {
     $("#selectDelete").val(elementAuthorities);
 });
 
+
+
