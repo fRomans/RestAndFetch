@@ -45,7 +45,7 @@ public class UserViewController {
                 model.addAttribute("userRole", myUser.getAuthorities());
                 model.addAttribute("userID", myUser.getId());
                 model.addAttribute("userMoney", myUser.getMoney());
-                pageName = "user";
+                pageName = "showUsers";
                 break;
             }
         }

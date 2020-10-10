@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>
-        .divTable, #addDiv {
+        .divTable,.divTable2, #addDiv {
             margin-top: 15px;
             margin-bottom: 15px;
             margin-right: 30px;
@@ -38,17 +38,19 @@
         #ul {
             /*display: flex;*/
         }
-        #idInfo{
+
+        #idInfo {
             padding: 0;
         }
-        #divMainUl{
+
+        #divMainUl {
             clear: both;
             width: 100%;
             margin: 0;
             padding: 0;
         }
 
-        #adminH1,#addUserH1 {
+        #adminH1, #adminH12, #addUserH1 {
             padding-left: 15px;
         }
 
@@ -90,10 +92,8 @@
                 <div class="container-fluid">
                     <ul class="nav nav-tabs" role="tablist">
                         <li class="nav-item"><a href="#adminPanelShow" class="nav-link active" role="tab"
-                                                data-toggle="tab">Users
-                            table</a></li>
-                        <li class="nav-item"><a href="#addUser" class="nav-link" role="tab" data-toggle="tab">New
-                            User</a></li>
+                                                data-toggle="tab">Users table</a></li>
+                        <li class="nav-item"><a href="#addUser" class="nav-link" role="tab" data-toggle="tab">New User</a></li>
 
                     </ul>
 
@@ -449,7 +449,36 @@
                     </div>
                 </div>
             </div>
-            <div role="tabpanel" class="tab-pane fade " id="idUser">UUUUUUUUUU</div>
+            <div role="tabpanel" class="tab-pane fade " id="idUser">
+                <h1>User panel</h1>
+
+
+                <div id="adminH12"><h6>User</h6></div>
+                <div class="divTable2">
+                    <table class="table table-striped">
+
+                        <thead th:border="3">
+                        <tr>
+                            <th>ID</th>
+                            <th>name</th>
+                            <th>money</th>
+                            <th>role</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td th:text="${userID}"></td>
+                            <td th:text="${userName}"></td>
+                            <td th:text="${userMoney}"></td>
+                            <td th:text="${userRole}"></td>
+
+
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 </div>
