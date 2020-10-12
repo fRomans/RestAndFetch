@@ -44,10 +44,8 @@ public class AdminController extends HttpServlet {
         UserDetails userUserDetails = (UserDetails) authentication.getPrincipal();
         for (GrantedAuthority role : authentication.getAuthorities()) {
             if (role.getAuthority().equals("ROLE_USER") ) {
-                String udname = userUserDetails.getUsername();
                 for (User userSearch : users) {
-                    String usname = userSearch.getUsername();
-                    if (udname.equals(usname) ) {
+                    if (userUserDetails.getUsername().equals(userSearch.getUsername()) ) {
                         myUser = userSearch;
                         break;
                     }

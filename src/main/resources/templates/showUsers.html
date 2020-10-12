@@ -50,9 +50,14 @@
             padding: 0;
         }
 
-        #adminH1, #adminH12, #addUserH1 {
+        #adminH1, #UserPanelTextH1, #addUserH1,#AdminPanelTextH1,#UserPanelTextH1 {
             padding-left: 15px;
         }
+        #adminH12{
+             padding-left: 15px;
+            background-color: #ebebe0;
+         }
+
 
     </style>
     <title>Список пользователей</title>
@@ -74,7 +79,7 @@
 </div>
 <div class="row" id="idRow1">
 
-    <div class="col-md-1 " id="divMainUl">
+    <div class="col-md-2 " id="divMainUl">
 
         <ul class="nav nav-pills" role="tablist" id="ul">
             <li class="nav-item " id="li1"><a href="#idAdmin" class="nav-link active" role="tab" data-toggle="pill">Admin</a>
@@ -84,11 +89,11 @@
 
         </ul>
     </div>
-    <div class="col-md-11" id="idInfo">
+    <div class="col-md-10" id="idInfo">
         <div class="tab-content" id="divTabContent">
 
             <div role="tabpanel" class="tab-pane fade show active" id="idAdmin">
-                <h1>Admin panel</h1>
+                <h1 id="AdminPanelTextH1">Admin panel</h1>
 
 
                 <div class="container-fluid">
@@ -148,8 +153,8 @@
                                                         </div>
                                                         <div class="modal-body">
                                                             <div class="row">
-                                                                <div class="col-md-2"></div>
-                                                                <div class="col-md-8">
+                                                                <div class="col-md-1"></div>
+                                                                <div class="col-md-10">
 
                                                                     <form action="/admin/update" method="post">
 
@@ -208,7 +213,7 @@
                                                                                 </div>
                                                                                 <div class="col-md-4"></div>
                                                                             </div>
-                                                                            <select class="form-control" name="role"
+                                                                            <select class="form-control" size="2" name="role"
                                                                                     id="select">
                                                                                 <option value="ROLE_ADMIN">
                                                                                     ROLE_ADMIN
@@ -239,7 +244,7 @@
                                                                         </div>
                                                                     </form>
                                                                 </div>
-                                                                <div class="col-md-2"></div>
+                                                                <div class="col-md-1"></div>
                                                             </div>
                                                         </div>
 
@@ -263,13 +268,13 @@
                                                 <div class="modal-dialog modal-sm">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h4 class="modal-title">Edit user</h4>
+                                                            <h4 class="modal-title">Delete user</h4>
                                                             <button class="close" data-dismiss="modal">x</button>
                                                         </div>
                                                         <div class="modal-body">
                                                             <div class="row">
-                                                                <div class="col-md-2"></div>
-                                                                <div class="col-md-8">
+                                                                <div class="col-md-1"></div>
+                                                                <div class="col-md-10">
 
                                                                     <form action="/admin/delete" method="post">
 
@@ -356,7 +361,7 @@
                                                                         </div>
                                                                     </form>
                                                                 </div>
-                                                                <div class="col-md-2"></div>
+                                                                <div class="col-md-1"></div>
                                                             </div>
                                                         </div>
 
@@ -376,8 +381,8 @@
                     <div role="tabpanel" class="tab-pane fade" id="addUser">
                         <div id="addUserH1"><h6>Add new user</h6></div>
                         <div class="row" id="addDiv">
-                            <div class="col-md-5"></div>
-                            <div class="col-md-2">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-3">
                                 <form action="/admin/add" method="post">
 
                                     <div class="form-group">
@@ -454,10 +459,11 @@
             </div>
 
             <div role="tabpanel" class="tab-pane fade " id="idUser">
-                <h1>User panel</h1>
+                <h1 id="UserPanelTextH1">User information-page</h1>
+
+                <div id="adminH12"><h6>About user</h6></div>
 
 
-                <div id="adminH12"><h6>User</h6></div>
                 <div class="divTable2">
                     <table class="table table-striped">
 
