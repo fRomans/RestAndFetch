@@ -1,6 +1,9 @@
 package ru.myTask1.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -34,9 +37,28 @@ public class AdminController extends HttpServlet {
     }
 
     @RequestMapping //url показа usera  в приложении(может не совпадать с url запуска сервера)
-    public String getIndex(Model model) {
+    public String getIndex(Authentication authentication, Model model) {
         List<User> users = userRepos.findAll();
         model.addAttribute("users", users);
+        User myUser = null;
+        UserDetails userUserDetails = (UserDetails) authentication.getPrincipal();
+        for (GrantedAuthority role : authentication.getAuthorities()) {
+            if (role.getAuthority().equals("ROLE_USER") ) {
+                String udname = userUserDetails.getUsername();
+                for (User userSearch : users) {
+                    String usname = userSearch.getUsername();
+                    if (udname.equals(usname) ) {
+                        myUser = userSearch;
+                        break;
+                    }
+                }
+                model.addAttribute("userName", myUser.getUsername());
+                model.addAttribute("userRole", myUser.getAuthorities());
+                model.addAttribute("userID", myUser.getId());
+                model.addAttribute("userMoney", myUser.getMoney());
+                break;
+            }
+        }
         return "showUsers";
     }
 
