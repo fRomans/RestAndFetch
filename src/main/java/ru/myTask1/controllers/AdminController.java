@@ -37,7 +37,7 @@ public class AdminController extends HttpServlet {
     }
 
     @RequestMapping //url показа usera  в приложении(может не совпадать с url запуска сервера)
-    public String getIndex(Authentication authentication, Model model) {
+    public String getIndex(@ModelAttribute User user,Authentication authentication, Model model) {
         List<User> users = userRepos.findAll();
         model.addAttribute("users", users);
         User myUser = null;
@@ -50,10 +50,10 @@ public class AdminController extends HttpServlet {
                         break;
                     }
                 }
-                model.addAttribute("userName", myUser.getUsername());
-                model.addAttribute("userRole", myUser.getAuthorities());
-                model.addAttribute("userID", myUser.getId());
-                model.addAttribute("userMoney", myUser.getMoney());
+                user.setName(myUser.getUsername());
+                user.setRoles((Set<Role>) myUser.getAuthorities());
+                user.setId( myUser.getId());
+                user.setMoney( myUser.getMoney());
                 break;
             }
         }
