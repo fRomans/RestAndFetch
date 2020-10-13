@@ -1,4 +1,4 @@
-package ru.myTask1.config.handler;
+package ru.myTask1.security;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;

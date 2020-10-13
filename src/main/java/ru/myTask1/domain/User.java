@@ -27,8 +27,6 @@ public class User implements UserDetails {
     @Column(name = "money")
     private Long money;
 
-//    @OneToMany(mappedBy="user",fetch = FetchType.EAGER)
-//    private Set<Role> roles;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles",

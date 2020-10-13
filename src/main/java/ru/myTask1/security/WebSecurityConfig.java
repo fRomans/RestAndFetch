@@ -1,4 +1,4 @@
-package ru.myTask1.config;
+package ru.myTask1.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import ru.myTask1.config.handler.LoginSuccessHandler;
 
 import javax.sql.DataSource;
 
@@ -70,7 +69,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authoritiesByUsernameQuery("select u.name, r.role from usersSS u inner join users_roles ur inner join roless r on u.id=user_id and r.id=role_id where u.name=?");
 
     }
-//select u.name, r.role from usersSS u inner join users_roles ur inner join roless r on u.id=user_id and r.id=role_id where u.name=?
     @Bean
     public PasswordEncoder delegatingPasswordEncoder() {
         return new BCryptPasswordEncoder();
