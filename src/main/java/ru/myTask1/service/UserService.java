@@ -35,8 +35,10 @@ public class UserService {
         userRepos.deleteById(id);
     }
 
-    public void UserUpdataService(Long id,User user, Set<Role> role){
-        User userUpdate = userRepos.findById(id).get();
+    public void UserUpdateService(User user, Set<Role> role){
+        Long hh = user.getId();
+        String nn = user.getUsername();
+        User userUpdate = userRepos.findById(hh).get();
         userUpdate.setName(user.getUsername());
         if (!user.getPassword().equals("")) {
             userUpdate.setPassword(passwordEncoder.encode(user.getPassword()));

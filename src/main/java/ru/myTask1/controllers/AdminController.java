@@ -81,8 +81,8 @@ public class AdminController extends HttpServlet {
 
 
     @PostMapping("/update")
-    public String getUpdateUser(@RequestParam(value = "updataId") Long id, @ModelAttribute User user, @RequestParam Set<Role> role) {
-        userService.UserUpdataService(id,user, role);
+    public String getUpdateUser( @ModelAttribute User user, @RequestParam Set<Role> role) {
+        userService.UserUpdateService(user, role);
         return "redirect:/admin";
     }
 
