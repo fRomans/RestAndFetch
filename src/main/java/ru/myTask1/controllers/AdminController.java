@@ -8,10 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import ru.myTask1.domain.Role;
 import ru.myTask1.domain.User;
 import ru.myTask1.repos.UserRepos;
@@ -36,11 +33,12 @@ public class AdminController extends HttpServlet {
         this.userRepos = userRepos;
     }
 
-    @RequestMapping //url показа usera  в приложении(может не совпадать с url запуска сервера)
+    @GetMapping  //url показа usera  в приложении(может не совпадать с url запуска сервера)
     public String getIndex(@ModelAttribute User user,Authentication authentication, Model model) {
         List<User> users = userRepos.findAll();
         model.addAttribute("users", users);
         User myUser = null;
+        //берем данные регистрации и аутентификации при входе user-a
         UserDetails userUserDetails = (UserDetails) authentication.getPrincipal();
         for (GrantedAuthority role : authentication.getAuthorities()) {
             if (role.getAuthority().equals("ROLE_USER")) {
@@ -60,13 +58,13 @@ public class AdminController extends HttpServlet {
         return "showUsers";
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    @GetMapping("/add")
     public String getPage() {
         return "addUser";
     }
 
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @PostMapping("/add")
     public String addUser(@ModelAttribute User user, @RequestParam(value = "role_id") Set<Role> role) {
         user.setRoles(role);
 
@@ -78,14 +76,14 @@ public class AdminController extends HttpServlet {
         return "redirect:/admin";//todo   привести  к такому виду!!!/
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @PostMapping("/delete")
     public String getDeleteUser(@RequestParam(value = "deleteId") Long id) {
         userRepos.deleteById(id);
         return "redirect:/admin";
     }
 
 
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @PostMapping("/update")
     public String getUpdateUser(@RequestParam(value = "updataId") Long id, @ModelAttribute User user, @RequestParam Set<Role> role) {
 
         User userUpdate = userRepos.findById(id).get();
