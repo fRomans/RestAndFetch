@@ -5,13 +5,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.myTask1.domain.Role;
 import ru.myTask1.domain.User;
-import ru.myTask1.repos.UserRepos;
+import ru.myTask1.service.UserService;
 
 import javax.servlet.http.HttpServlet;
 import java.util.List;
@@ -23,19 +22,17 @@ import java.util.Set;
 public class AdminController extends HttpServlet {
 
 
-    private UserRepos userRepos;
+    private UserService userService;
 
-    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public AdminController(PasswordEncoder passwordEncoder, UserRepos userRepos) {
-        this.passwordEncoder = passwordEncoder;
-        this.userRepos = userRepos;
+    public AdminController(UserService userService) {
+        this.userService = userService;
     }
 
     @GetMapping  //url показа usera  в приложении(может не совпадать с url запуска сервера)
-    public String getIndex(@ModelAttribute User user,Authentication authentication, Model model) {
-        List<User> users = userRepos.findAll();
+    public String getIndex(@ModelAttribute User user, Authentication authentication, Model model) {
+        List<User> users = userService.findAllService();
         model.addAttribute("users", users);
         User myUser = null;
         //берем данные регистрации и аутентификации при входе user-a
@@ -50,8 +47,8 @@ public class AdminController extends HttpServlet {
                 }
                 user.setName(myUser.getUsername());
                 user.setRoles((Set<Role>) myUser.getAuthorities());
-                user.setId( myUser.getId());
-                user.setMoney( myUser.getMoney());
+                user.setId(myUser.getId());
+                user.setMoney(myUser.getMoney());
                 break;
             }
         }
@@ -72,28 +69,20 @@ public class AdminController extends HttpServlet {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String hashedPassword = passwordEncoder.encode(password);
         user.setPassword(hashedPassword);
-        userRepos.save(user);
+        userService.saveService(user);
         return "redirect:/admin";//todo   привести  к такому виду!!!/
     }
 
     @PostMapping("/delete")
     public String getDeleteUser(@RequestParam(value = "deleteId") Long id) {
-        userRepos.deleteById(id);
+        userService.deleteByIdService(id);
         return "redirect:/admin";
     }
 
 
     @PostMapping("/update")
     public String getUpdateUser(@RequestParam(value = "updataId") Long id, @ModelAttribute User user, @RequestParam Set<Role> role) {
-
-        User userUpdate = userRepos.findById(id).get();
-        userUpdate.setName(user.getUsername());
-        if (!user.getPassword().equals("")) {
-            userUpdate.setPassword(passwordEncoder.encode(user.getPassword()));
-        }
-        userUpdate.setMoney(user.getMoney());
-        userUpdate.setRoles(role);
-        userRepos.flush();
+        userService.UserUpdataService(id,user, role);
         return "redirect:/admin";
     }
 
