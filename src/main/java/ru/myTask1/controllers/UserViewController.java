@@ -19,7 +19,7 @@ import java.util.Set;
 @Controller
 public class UserViewController {
 
-    private UserRepos userRepos;
+    private final UserRepos userRepos;
 
     @Autowired
     public UserViewController(UserRepos userRepos) {
@@ -43,6 +43,7 @@ public class UserViewController {
         user.setRoles((Set<Role>) myUser.getAuthorities());
         user.setId(myUser.getId());
         user.setMoney(myUser.getMoney());
+        model.addAttribute("user", user);
 
         return "user";
     }

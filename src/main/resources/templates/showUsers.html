@@ -82,14 +82,14 @@
                                         <td>
 
 
-                                            <input type="submit" value="Edit" data-toggle="modal"
+                                            <button type="submit"
+                                                    class="btn btn-info btn-md"  data-toggle="modal"
                                                    data-target="#ModalEdit"
-                                                   style="background-color: #0070BC"
                                                    th:data-name="${user.getUsername()}"
                                                    th:data-money="${user.getMoney()}"
                                                    th:data-password="${user.getPassword()}"
                                                    th:data-authorities="${user.getAuthorities()}"
-                                                   th:data-id="${user.getId()}">
+                                                    th:data-id="${user.getId()}">Edit</button>
 
 
                                             <div id="ModalEdit" class="modal fade">
@@ -185,7 +185,7 @@
                                                                             </div>
                                                                             <div class="col-md-5">
                                                                                 <button type="submit"
-                                                                                        class="btn btn-success btn-block">
+                                                                                        class="btn btn-success btn-block" >
                                                                                     <h8>Edit</h8>
                                                                                 </button>
                                                                             </div>
@@ -203,14 +203,15 @@
 
                                         </td>
                                         <td>
-                                            <input type="submit" value="Delete" data-toggle="modal"
+
+                                            <button type="submit"
+                                                    class="btn btn-danger btn-md"  data-toggle="modal"
                                                    data-target="#ModalDelete"
-                                                   style="background-color: #F40009"
                                                    th:data-name="${user.getUsername()}"
                                                    th:data-money="${user.getMoney()}"
                                                    th:data-password="${user.getPassword()}"
                                                    th:data-authorities="${user.getAuthorities()}"
-                                                   th:data-id="${user.getId()}">
+                                                    th:data-id="${user.getId()}">Delete</button>
 
                                             <div id="ModalDelete" class="modal fade">
                                                 <div class="modal-dialog modal-sm">

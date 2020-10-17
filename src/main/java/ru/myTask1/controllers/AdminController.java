@@ -22,7 +22,7 @@ import java.util.Set;
 public class AdminController extends HttpServlet {
 
 
-    private UserService userService;
+    private final UserService userService;
 
 
     @Autowired
@@ -45,10 +45,12 @@ public class AdminController extends HttpServlet {
                         break;
                     }
                 }
+
                 user.setName(myUser.getUsername());
                 user.setRoles((Set<Role>) myUser.getAuthorities());
                 user.setId(myUser.getId());
                 user.setMoney(myUser.getMoney());
+                model.addAttribute("user",user);
                 break;
             }
         }
