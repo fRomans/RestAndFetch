@@ -4,10 +4,10 @@ package ru.myTask1.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RestController;
 import ru.myTask1.domain.Role;
 import ru.myTask1.domain.User;
 import ru.myTask1.repos.UserRepos;
@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Set;
 
 
-@Controller
+@RestController
 public class UserViewController {
 
     private final UserRepos userRepos;
@@ -27,7 +27,7 @@ public class UserViewController {
     }
 
     @GetMapping("/user")
-    public String getUserPage(@ModelAttribute User user, Authentication authentication, Model model) {
+    public User getUserPage(@ModelAttribute User user, Authentication authentication, Model model) {
 
         List<User> users = userRepos.findAll();
         User myUser = null;
@@ -43,8 +43,8 @@ public class UserViewController {
         user.setRoles((Set<Role>) myUser.getAuthorities());
         user.setId(myUser.getId());
         user.setMoney(myUser.getMoney());
-        model.addAttribute("user", user);
+        //model.addAttribute("user", user);
 
-        return "user";
+        return user;
     }
 }

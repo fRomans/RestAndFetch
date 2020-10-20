@@ -1,7 +1,9 @@
 package ru.myTask1.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
+
 import javax.persistence.*;
 import java.util.Objects;
 import java.util.Set;
@@ -12,6 +14,7 @@ import java.util.Set;
 public class Role implements GrantedAuthority {
 
     @Id
+    @JsonIgnore
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
@@ -19,7 +22,7 @@ public class Role implements GrantedAuthority {
     @Column(name = "role")
     private String role;
 
-
+    @JsonIgnore
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable (name="users_roles",
             joinColumns=@JoinColumn (name="role_id"),
