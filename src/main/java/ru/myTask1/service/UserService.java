@@ -23,19 +23,19 @@ public class UserService {
         this.userRepos = userRepos;
     }
 
-    public List<User> findAllService(){
+    public List<User> findAllService() {
         return userRepos.findAll();
     }
 
-    public void saveService(User user){
+    public void saveService(User user) {
         userRepos.save(user);
     }
 
-    public void deleteByIdService(Long id){
+    public void deleteByIdService(Long id) {
         userRepos.deleteById(id);
     }
 
-    public void UserUpdateService(User user, Set<Role> role){
+    public User UserUpdateService(User user, Set<Role> role) {
         Long hh = user.getId();
         String nn = user.getUsername();
         User userUpdate = userRepos.findById(hh).get();
@@ -46,7 +46,7 @@ public class UserService {
         userUpdate.setMoney(user.getMoney());
         userUpdate.setRoles(role);
         userRepos.flush();
-
+        return userUpdate;
     }
 
 

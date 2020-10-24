@@ -37,3 +37,21 @@ $('#ModalDelete').on('show.bs.modal', function Delete(event) {
 
 
 
+const headers = {
+    'Content-Type': 'application/json'
+}
+function sendRequest(method, urlRequest) {
+    return fetch(urlRequest,{
+            method: method,
+        headers: headers
+        }
+        ).then(response=>{
+            if (response.ok){
+       return  response.json()
+            }
+                return response.json().then(onerror=>{
+                    const e = new Error('Все плоооооохо!!!!!!!!!!!!!!')
+                    console.log('!!!!!!!!!!!!!!!!!' + e)
+                })
+    })
+}
