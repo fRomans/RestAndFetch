@@ -36,22 +36,41 @@ $('#ModalDelete').on('show.bs.modal', function Delete(event) {
 });
 
 
-
 const headers = {
     'Content-Type': 'application/json'
 }
-function sendRequest(method, urlRequest) {
-    return fetch(urlRequest,{
+let obj;
+let editButton = document.getElementById('buttonEdit');
+editButton.addEventListener('click', function (ev) {
+    let name = document.forms['editForm'].elements['inputName'].value;
+    let pass = document.forms['editForm'].elements['inputPassword'].value;
+    let money = document.forms['editForm'].elements['inputMoney'].value;
+    let role = document.forms['editForm'].elements['select'].value;
+
+    obj = {
+        name: name,
+        pass: pass,
+        money: money,
+        role: role
+    }
+})
+
+async function sendRequest(method, urlRequest) {
+    let response = await fetch(urlRequest,
+        {
             method: method,
-        headers: headers
-        }
-        ).then(response=>{
-            if (response.ok){
-       return  response.json()
-            }
-                return response.json().then(onerror=>{
-                    const e = new Error('Все плоооооохо!!!!!!!!!!!!!!')
-                    console.log('!!!!!!!!!!!!!!!!!' + e)
-                })
-    })
+            headers: headers,
+            body: JSON.stringify(obj)
+        });
+
+    if (response.ok) { // если HTTP-статус в диапазоне 200-299
+        // получаем тело ответа (см. про этот метод ниже)
+        let json = await response.json();
+    } else {
+        alert("Ошибка HTTP: " + response.status);
+    }
 }
+
+
+
+
