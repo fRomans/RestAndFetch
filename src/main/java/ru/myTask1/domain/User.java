@@ -50,6 +50,7 @@ public class User implements UserDetails {
         return id;
     }
 
+
     public void setId(long id) {
         this.id = id;
     }

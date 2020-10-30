@@ -57,8 +57,9 @@ public class RestAdminController extends HttpServlet {
     }
 
     @PostMapping("/update")
-    public User getUpdateUser(@ModelAttribute User user, @RequestParam Set<Role> role) {
-        User userNew = userService.UserUpdateService(user, role);
+    public User getUpdateUser(@RequestBody User user) {
+        User userNew = user;
+        System.out.println(userNew);
 
         return userNew;
     }

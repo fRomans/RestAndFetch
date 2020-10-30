@@ -1,11 +1,11 @@
 $('#ModalEdit').on('show.bs.modal', function (event) {
-    var elementId = $(event.relatedTarget).data('id');
-    var elementName = $(event.relatedTarget).data('name');
+    let elementId = $(event.relatedTarget).data('id');
+    let elementName = $(event.relatedTarget).data('name');
     // debugger
     // if (условие)debugger
-    var elementPassword = $(event.relatedTarget).data('password');
-    var elementMoney = $(event.relatedTarget).data('money');
-    var elementAuthorities = $(event.relatedTarget).data('authorities');
+    let elementPassword = $(event.relatedTarget).data('password');
+    let elementMoney = $(event.relatedTarget).data('money');
+    let elementAuthorities = $(event.relatedTarget).data('authorities');
 
 
     if (elementAuthorities === "[ROLE_ADMIN, ROLE_USER]" || elementAuthorities === "[ROLE_USER, ROLE_ADMIN]") {
@@ -24,10 +24,10 @@ $('#ModalEdit').on('show.bs.modal', function (event) {
 });
 
 $('#ModalDelete').on('show.bs.modal', function Delete(event) {
-    var elementId = $(event.relatedTarget).data('id');
-    var elementName = $(event.relatedTarget).data('name');
-    var elementMoney = $(event.relatedTarget).data('money');
-    var elementAuthorities = $(event.relatedTarget).data('authorities');
+    let elementId = $(event.relatedTarget).data('id');
+    let elementName = $(event.relatedTarget).data('name');
+    let elementMoney = $(event.relatedTarget).data('money');
+    let elementAuthorities = $(event.relatedTarget).data('authorities');
 
     $("#inputNameDelete").val(elementName);
     $("#inputIdDelete").val(elementId);
@@ -42,12 +42,14 @@ const headers = {
 let obj;
 let editButton = document.getElementById('buttonEdit');
 editButton.addEventListener('click', function (ev) {
+    let id = document.forms['editForm'].elements['inputId'].value;
     let name = document.forms['editForm'].elements['inputName'].value;
     let pass = document.forms['editForm'].elements['inputPassword'].value;
     let money = document.forms['editForm'].elements['inputMoney'].value;
     let role = document.forms['editForm'].elements['select'].value;
 
     obj = {
+        id:id,
         name: name,
         pass: pass,
         money: money,
@@ -61,14 +63,15 @@ async function sendRequest(method, urlRequest) {
             method: method,
             headers: headers,
             body: JSON.stringify(obj)
-        });
-
-    if (response.ok) { // если HTTP-статус в диапазоне 200-299
-        // получаем тело ответа (см. про этот метод ниже)
-        let json = await response.json();
-    } else {
-        alert("Ошибка HTTP: " + response.status);
-    }
+        }).then(function (response) {
+        if (response.ok) { // если HTTP-статус в диапазоне 200-299
+            // получаем тело ответа (см. про этот метод ниже)
+            let json =  response.json();
+            console.log(json);
+        } else {
+            alert("Ошибка HTTP: " + response.status);
+        }
+    })
 }
 
 

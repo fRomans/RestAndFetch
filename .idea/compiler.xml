@@ -6,9 +6,9 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="Bootstrap" />
         <module name="springBoot1-master" />
         <module name="RestAndFetch" />
-        <module name="Bootstrap" />
         <module name="springBoot" />
       </profile>
     </annotationProcessing>
