@@ -56,10 +56,10 @@ public class RestAdminController extends HttpServlet {
         return user;
     }
 
-    @PostMapping("/update")
+    @PostMapping(value = "/update")
     public User getUpdateUser(@RequestBody User user) {
         User userNew = user;
-        System.out.println(userNew);
+        System.out.println("рест контроллер"+userNew);
 
         return userNew;
     }

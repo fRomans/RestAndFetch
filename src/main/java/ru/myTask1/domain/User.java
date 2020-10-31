@@ -34,16 +34,16 @@ public class User implements UserDetails {
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> rolesfield;
+    private Set<Role> role;
 
     public User() {
     }
 
-    public User(String name, String password, Long money, Set<Role> rolesfield) {
+    public User(String name, String password, Long money, Set<Role> role) {
         this.name = name;
         this.password = password;
         this.money = money;
-        this.rolesfield = rolesfield;
+        this.role = role;
     }
 
     public long getId() {
@@ -108,12 +108,12 @@ public class User implements UserDetails {
     }
 
     public void setRoles(Set<Role> roles) {
-        this.rolesfield = roles;
+        this.role = roles;
     }
 
     @Override
     public Collection<Role> getAuthorities()  {
-        return rolesfield;
+        return role;
     }
 
     @Override
@@ -130,7 +130,7 @@ public class User implements UserDetails {
                 Objects.equals(name, user.name) &&
                 Objects.equals(password, user.password) &&
                 Objects.equals(money, user.money) &&
-                Objects.equals(rolesfield, user.rolesfield);
+                Objects.equals(role, user.role);
     }
 
     @Override
@@ -140,7 +140,7 @@ public class User implements UserDetails {
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
                 ", money=" + money +
-                ", roles=" + rolesfield +
+                ", roles=" + role +
                 '}';
     }
 }

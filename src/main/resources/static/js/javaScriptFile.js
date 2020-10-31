@@ -37,42 +37,39 @@ $('#ModalDelete').on('show.bs.modal', function Delete(event) {
 
 
 const headers = {
-    'Content-Type': 'application/json'
+    Accept: 'application/json',
+    'Content-Type': 'application/json;charset=utf-8'
 }
-let obj;
-let editButton = document.getElementById('buttonEdit');
-editButton.addEventListener('click', function (ev) {
-    let id = document.forms['editForm'].elements['inputId'].value;
-    let name = document.forms['editForm'].elements['inputName'].value;
-    let pass = document.forms['editForm'].elements['inputPassword'].value;
-    let money = document.forms['editForm'].elements['inputMoney'].value;
-    let role = document.forms['editForm'].elements['select'].value;
 
-    obj = {
-        id:id,
-        name: name,
-        pass: pass,
-        money: money,
-        role: role
-    }
-})
 
-async function sendRequest(method, urlRequest) {
-    let response = await fetch(urlRequest,
+
+async function sendRequest() {
+    let   id = document.forms['editForm'].elements['inputId'].value;
+    let   name = document.forms['editForm'].elements['inputName'].value;
+    let   pass = document.forms['editForm'].elements['inputPassword'].value;
+    let   money = document.forms['editForm'].elements['inputMoney'].value;
+    let   role = document.forms['editForm'].elements['select'].value;
+
+
+    let rawResponse =  await fetch('/admin/update',
         {
-            method: method,
-            headers: headers,
-            body: JSON.stringify(obj)
-        }).then(function (response) {
-        if (response.ok) { // если HTTP-статус в диапазоне 200-299
-            // получаем тело ответа (см. про этот метод ниже)
-            let json =  response.json();
-            console.log(json);
-        } else {
-            alert("Ошибка HTTP: " + response.status);
-        }
-    })
-}
+            // mode: 'cors',
+            method: "POST",
+            headers: {Accept: 'application/json',
+                'Content-Type': 'application/json;charset=utf-8'},
+            body: JSON.stringify({
+                id: id,
+                name: name,
+                pass: pass,
+                money: money,
+                role: role
+            })
+        });
+    const content = await rawResponse.json();
+
+    console.log(content);
+    }
+
 
 
 
