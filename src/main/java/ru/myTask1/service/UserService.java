@@ -11,10 +11,9 @@ import java.util.List;
 import java.util.Set;
 
 @Component
-public class UserService {
+public class UserService  {
 
     private UserRepos userRepos;
-
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
@@ -22,6 +21,7 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
         this.userRepos = userRepos;
     }
+
 
     public List<User> findAllService() {
         return userRepos.findAll();
@@ -49,5 +49,25 @@ public class UserService {
         return userUpdate;
     }
 
+    public User UserUpdateService2(User user) {
+        Long hh = user.getId();
+        //String nn = user.getUsername();
+        User userUpdate = userRepos.findById(hh).get();
+        userUpdate.setName(user.getUsername());
+        if (!user.getPassword().equals("")) {
+            userUpdate.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
+        userUpdate.setMoney(user.getMoney());
+        userUpdate.setRoles((Set<Role>) user.getAuthorities());
+        userRepos.flush();
+        return userUpdate;
+    }
+
+    public User findByIdService(Long id) {
+
+        User userEdit = userRepos.findById(id).get();
+
+        return userEdit;
+    }
 
 }

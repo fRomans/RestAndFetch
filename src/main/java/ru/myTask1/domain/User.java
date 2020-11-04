@@ -29,7 +29,6 @@ public class User implements UserDetails {
     private Long money;
 
 
-
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -39,12 +38,21 @@ public class User implements UserDetails {
     public User() {
     }
 
+    public User(long id, String name, String pass, long money) {
+        this.id = id;
+        this.name = name;
+        this.password = pass;
+        this.money = money;
+    }
+
     public User(String name, String password, Long money, Set<Role> role) {
         this.name = name;
         this.password = password;
         this.money = money;
         this.role = role;
     }
+
+
 
     public long getId() {
         return id;

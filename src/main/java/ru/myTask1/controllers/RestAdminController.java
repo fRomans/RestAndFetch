@@ -6,6 +6,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.myTask1.DTO.UserConverter;
+import ru.myTask1.DTO.UserDTO;
 import ru.myTask1.domain.Role;
 import ru.myTask1.domain.User;
 import ru.myTask1.service.UserService;
@@ -21,11 +23,13 @@ public class RestAdminController extends HttpServlet {
 
 
     private final UserService userService;
+    private UserConverter userConverter;
 
 
     @Autowired
-    public RestAdminController(UserService userService) {
+    public RestAdminController(UserService userService, UserConverter userConverter) {
         this.userService = userService;
+        this.userConverter = userConverter;
     }
 
 
@@ -57,14 +61,15 @@ public class RestAdminController extends HttpServlet {
     }
 
     @PostMapping(value = "/update")
-    public User getUpdateUser(@RequestBody User user) {
-        User userNew = user;
-        System.out.println("рест контроллер"+userNew);
+    public UserDTO getUpdateUser(@RequestBody UserDTO userDTO) {
 
-        return userNew;
+        User user = userConverter.dtoToEntity(userDTO);
+        User userUpdate = userService.UserUpdateService2(user);
+        userDTO = userConverter.entityToDto(userUpdate);
+
+
+        return userDTO;
     }
-
-
 
 
 }

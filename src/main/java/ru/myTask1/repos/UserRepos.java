@@ -7,4 +7,5 @@ import ru.myTask1.domain.User;
 public interface UserRepos extends JpaRepository<User, Long> {
     User findByName(String username);
 
+
 }

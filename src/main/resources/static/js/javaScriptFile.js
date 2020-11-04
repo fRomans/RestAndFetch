@@ -60,9 +60,9 @@ async function sendRequest() {
             body: JSON.stringify({
                 id: id,
                 name: name,
-                pass: pass,
+                password: pass,
                 money: money,
-                role: role
+                role: [role]
             })
         });
     const content = await rawResponse.json();

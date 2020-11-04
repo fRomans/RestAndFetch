@@ -1,7 +1,9 @@
 package ru.myTask1;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class ServingWebContentApplication {
@@ -10,4 +12,9 @@ public class ServingWebContentApplication {
         SpringApplication.run(ServingWebContentApplication.class, args);
     }
 
+
+    @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
+    }
 }
