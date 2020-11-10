@@ -42,35 +42,55 @@ const headers = {
 }
 
 
-
 async function sendRequest() {
-    let   id = document.forms['editForm'].elements['inputId'].value;
-    let   name = document.forms['editForm'].elements['inputName'].value;
-    let   pass = document.forms['editForm'].elements['inputPassword'].value;
-    let   money = document.forms['editForm'].elements['inputMoney'].value;
-    let   role = document.forms['editForm'].elements['select'].value;
+    let id = document.forms['editForm'].elements['inputId'].value;
+    let name = document.forms['editForm'].elements['inputName'].value;
+    let pass = document.forms['editForm'].elements['inputPassword'].value;
+    let money = document.forms['editForm'].elements['inputMoney'].value;
+    let role = document.forms['editForm'].elements['select'].value;
 
 
-    let rawResponse =  await fetch('/admin/update',
+    let rawResponse = await fetch('/admin/update',
         {
             // mode: 'cors',
             method: "POST",
-            headers: {Accept: 'application/json',
-                'Content-Type': 'application/json;charset=utf-8'},
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json;charset=utf-8'
+            },
             body: JSON.stringify({
                 id: id,
                 name: name,
                 password: pass,
                 money: money,
                 role: [role]
-            })
+            }),
+        })
+        .then(function (response) {
+
+            console.log(response);
+            return response.json();
+        })
+        .then(function (data) {
+            let money = data.money;
+            let id = data.id;
+
+            $("#showAllUserForm tbody").empty();
+            document.querySelector("#userMoney1").innerHTML=money;
+
         });
-    const content = await rawResponse.json();
-
-    console.log(content);
-    }
 
 
+};
 
+// $("#load").html(msg);
 
+// const content = await rawResponse.json();
+// console.log(content);
 
+// document.querySelector("#userId").innerHTML="y"
+//
+// $("#userId").val("3");
+// $("#userUsername").val("3");
+// $("#userMoney").val("3");
+// $("#userAuthorities").val("3");

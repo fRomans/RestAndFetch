@@ -32,8 +32,7 @@
         <ul class="nav nav-pills" role="tablist" id="ul">
             <li class="nav-item " id="li1"><a href="#idAdmin" class="nav-link active" role="tab" data-toggle="pill">Admin</a>
             </li>
-            <li class="nav-item" id="li2"><a href="#idUser"  class="nav-link" role="tab" data-toggle="pill"
-            >User</a></li>
+            <li class="nav-item" id="li2"><a href="#idUser"  class="nav-link" role="tab" data-toggle="pill">User</a></li>
 
         </ul>
     </div>
@@ -59,7 +58,7 @@
                     <div role="tabpanel" class="tab-pane fade show active" id="adminPanelShow">
                         <div id="adminH1"><h6>All users</h6></div>
                         <div class="divTable">
-                            <table class="table table-striped">
+                            <table class="table table-striped" id="showAllUserForm">
 
                                 <thead th:border="3">
                                 <tr>
@@ -75,10 +74,11 @@
                                 <tbody>
                                 <th:block th:each="user: ${users}">
                                     <tr>
-                                        <td th:text="${user.getId()}"></td>
-                                        <td th:text="${user.getUsername()}"></td>
-                                        <td th:text="${user.getMoney()}"></td>
-                                        <td th:text="${user.getAuthorities()}"></td>
+                                        <td id="userId" th:text="${user.getId()}"></td>
+                                        <td id="userUsername" th:text="${user.getUsername()}"></td>
+                                        <td id="userMoney" th:text="${user.getMoney()}"></td>
+                                        <td id="userAuthorities"th:text="${user.getAuthorities()}"></td>
+
                                         <td>
 
 
@@ -185,7 +185,8 @@
                                                                             </div>
                                                                             <div class="col-md-5">
                                                                                 <button type="button" id="buttonEdit" onclick="sendRequest()"
-                                                                                        class="btn btn-success btn-block" >
+                                                                                        class="btn btn-success btn-block"
+                                                                                        data-dismiss="modal">
                                                                                     <h8>Edit</h8>
                                                                                 </button>
                                                                             </div>

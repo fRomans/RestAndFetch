@@ -66,8 +66,7 @@ public class RestAdminController extends HttpServlet {
         User user = userConverter.dtoToEntity(userDTO);
         User userUpdate = userService.UserUpdateService2(user);
         userDTO = userConverter.entityToDto(userUpdate);
-
-
+        List<User> users = userService.findAllService();
         return userDTO;
     }
 

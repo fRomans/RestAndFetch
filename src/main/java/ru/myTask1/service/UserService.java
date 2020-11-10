@@ -50,9 +50,8 @@ public class UserService  {
     }
 
     public User UserUpdateService2(User user) {
-        Long hh = user.getId();
-        //String nn = user.getUsername();
-        User userUpdate = userRepos.findById(hh).get();
+        Long searchUserById = user.getId();
+        User userUpdate = userRepos.findById(searchUserById).get();
         userUpdate.setName(user.getUsername());
         if (!user.getPassword().equals("")) {
             userUpdate.setPassword(passwordEncoder.encode(user.getPassword()));
