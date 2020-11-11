@@ -61,13 +61,14 @@ public class RestAdminController extends HttpServlet {
     }
 
     @PostMapping(value = "/update")
-    public UserDTO getUpdateUser(@RequestBody UserDTO userDTO) {
+    public  List<UserDTO> getUpdateUser(@RequestBody UserDTO userDTO) {
 
         User user = userConverter.dtoToEntity(userDTO);
         User userUpdate = userService.UserUpdateService2(user);
         userDTO = userConverter.entityToDto(userUpdate);
         List<User> users = userService.findAllService();
-        return userDTO;
+        List<UserDTO> usersDTO = userConverter.entityToDto(users);
+        return usersDTO;
     }
 
 

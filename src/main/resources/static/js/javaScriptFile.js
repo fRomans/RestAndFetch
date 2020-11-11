@@ -72,11 +72,51 @@ async function sendRequest() {
             return response.json();
         })
         .then(function (data) {
-            let money = data.money;
-            let id = data.id;
 
-            $("#showAllUserForm tbody").empty();
-            document.querySelector("#userMoney1").innerHTML=money;
+            // let id = data.id;
+            // let name = data.name;
+            // let money = data.money;
+            // let authorities = data.role;
+            // let password = data.password;
+
+            $("#showAllUserForm tbody > tr").empty();
+            let users = data;
+            for ( let i = 0; i < users.length; i++){
+            $('#showAllUserForm tbody').append("<tr>\n" +
+                "                                        <td>"+users[i].id+"</td>\n" +
+                "                                        <td>"+users[i].name+"</td>\n" +
+                "                                        <td>"+users[i].money+"</td>\n" +
+                "                                        <td>"+users[i].role+"</td>\n" +
+                "\n" +
+                "                                        <td>\n" +
+                "\n" +
+                "                                            <button type=\"submit\"\n" +
+                "                                                    class=\"btn btn-info btn-md\" data-toggle=\"modal\"\n" +
+                "                                                    data-target=\"#ModalEdit\"\n" +
+                "                                                    th:data-name="+name+"+\n" +
+                "                                                    th:data-money=\"money+\"+\n" +
+                // "                                                    th:data-password="+password+"+\n" +
+                // "                                                    th:data-authorities="+authorities+"+\n" +
+                "                                                    th:data-id="+id+"" +
+                ">Edit\n" +
+                "                                            </button>\n" +
+                "\n" +
+                "                                        </td>\n" +
+                "                                        <td>\n" +
+                "\n" +
+                "                                            <button type=\"submit\"\n" +
+                "                                                    class=\"btn btn-danger btn-md\" data-toggle=\"modal\"\n" +
+                "                                                    data-target=\"#ModalDelete\"\n" +
+                "                                                    th:data-name=\"${user.getUsername()}\"\n" +
+                "                                                    th:data-money=\"${user.getMoney()}\"\n" +
+                "                                                    th:data-password=\"${user.getPassword()}\"\n" +
+                "                                                    th:data-authorities=\"${user.getAuthorities()}\"\n" +
+                "                                                    th:data-id=\"${user.getId()}\">Delete\n" +
+                "                                            </button>\n" +
+                "\n" +
+                "                                        </td>\n" +
+                "                                    </tr>");
+            }
 
         });
 
@@ -94,3 +134,5 @@ async function sendRequest() {
 // $("#userUsername").val("3");
 // $("#userMoney").val("3");
 // $("#userAuthorities").val("3");
+// document.querySelector("#userMoney1").innerHTML=money;
+
