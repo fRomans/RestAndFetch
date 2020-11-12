@@ -52,7 +52,6 @@ async function sendRequest() {
 
     let rawResponse = await fetch('/admin/update',
         {
-            // mode: 'cors',
             method: "POST",
             headers: {
                 Accept: 'application/json',
@@ -73,11 +72,6 @@ async function sendRequest() {
         })
         .then(function (data) {
 
-            // let id = data.id;
-            // let name = data.name;
-            // let money = data.money;
-            // let authorities = data.role;
-            // let password = data.password;
 
             $("#showAllUserForm tbody > tr").empty();
             let users = data;
@@ -93,11 +87,10 @@ async function sendRequest() {
                 "                                            <button type=\"submit\"\n" +
                 "                                                    class=\"btn btn-info btn-md\" data-toggle=\"modal\"\n" +
                 "                                                    data-target=\"#ModalEdit\"\n" +
-                "                                                    th:data-name="+name+"+\n" +
-                "                                                    th:data-money=\"money+\"+\n" +
-                // "                                                    th:data-password="+password+"+\n" +
-                // "                                                    th:data-authorities="+authorities+"+\n" +
-                "                                                    th:data-id="+id+"" +
+                "                                                    data-name="+users[i].name+"\n" +
+                "                                                    data-money="+users[i].money+"\n" +
+                "                                                    data-authorities="+users[i].role+"\n" +
+                "                                                    data-id="+users[i].id+"\n" +
                 ">Edit\n" +
                 "                                            </button>\n" +
                 "\n" +
