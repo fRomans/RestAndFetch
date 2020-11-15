@@ -74,43 +74,51 @@ async function sendRequest() {
 
 
             $("#showAllUserForm tbody > tr").empty();
-            let users = data;
-            for ( let i = 0; i < users.length; i++){
-            $('#showAllUserForm tbody').append("<tr>\n" +
-                "                                        <td>"+users[i].id+"</td>\n" +
-                "                                        <td>"+users[i].name+"</td>\n" +
-                "                                        <td>"+users[i].money+"</td>\n" +
-                "                                        <td>"+users[i].role+"</td>\n" +
-                "\n" +
-                "                                        <td>\n" +
-                "\n" +
-                "                                            <button type=\"submit\"\n" +
-                "                                                    class=\"btn btn-info btn-md\" data-toggle=\"modal\"\n" +
-                "                                                    data-target=\"#ModalEdit\"\n" +
-                "                                                    data-name="+users[i].name+"\n" +
-                "                                                    data-money="+users[i].money+"\n" +
-                "                                                    data-authorities="+users[i].role+"\n" +
-                "                                                    data-id="+users[i].id+"\n" +
-                ">Edit\n" +
-                "                                            </button>\n" +
-                "\n" +
-                "                                        </td>\n" +
-                "                                        <td>\n" +
-                "\n" +
-                "                                            <button type=\"submit\"\n" +
-                "                                                    class=\"btn btn-danger btn-md\" data-toggle=\"modal\"\n" +
-                "                                                    data-target=\"#ModalDelete\"\n" +
-                "                                                    th:data-name=\"${user.getUsername()}\"\n" +
-                "                                                    th:data-money=\"${user.getMoney()}\"\n" +
-                "                                                    th:data-password=\"${user.getPassword()}\"\n" +
-                "                                                    th:data-authorities=\"${user.getAuthorities()}\"\n" +
-                "                                                    th:data-id=\"${user.getId()}\">Delete\n" +
-                "                                            </button>\n" +
-                "\n" +
-                "                                        </td>\n" +
-                "                                    </tr>");
-            }
 
+            let users = data;
+            let resultRole = "";
+            for (let i = 0; i < users.length; i++) {
+
+
+                for (let j = 0; j < users[i].role.length; j++) {
+                    resultRole += JSON.stringify(users[i].role[j]['authority']);
+                }
+                    $('#showAllUserForm tbody').append("<tr>\n" +
+                        "                                        <td>" + users[i].id + "</td>\n" +
+                        "                                        <td>" + users[i].name + "</td>\n" +
+                        "                                        <td>" + users[i].money + "</td>\n" +
+                        "                                        <td>" + resultRole + "</td>\n" +
+                        "\n" +
+                        "                                        <td>\n" +
+                        "\n" +
+                        "                                            <button type=\"submit\"\n" +
+                        "                                                    class=\"btn btn-info btn-md\" data-toggle=\"modal\"\n" +
+                        "                                                    data-target=\"#ModalEdit\"\n" +
+                        "                                                    data-name=" + users[i].name + "\n" +
+                        "                                                    data-money=" + users[i].money + "\n" +
+                        "                                                    data-authorities=" + users[i].role + "\n" +
+                        "                                                    data-id=" + users[i].id + "\n" +
+                        ">Edit\n" +
+                        "                                            </button>\n" +
+                        "\n" +
+                        "                                        </td>\n" +
+                        "                                        <td>\n" +
+                        "\n" +
+                        "                                            <button type=\"submit\"\n" +
+                        "                                                    class=\"btn btn-danger btn-md\" data-toggle=\"modal\"\n" +
+                        "                                                    data-target=\"#ModalDelete\"\n" +
+                        "                                                    th:data-name=\"${user.getUsername()}\"\n" +
+                        "                                                    th:data-money=\"${user.getMoney()}\"\n" +
+                        "                                                    th:data-password=\"${user.getPassword()}\"\n" +
+                        "                                                    th:data-authorities=\"${user.getAuthorities()}\"\n" +
+                        "                                                    th:data-id=\"${user.getId()}\">Delete\n" +
+                        "                                            </button>\n" +
+                        "\n" +
+                        "                                        </td>\n" +
+                        "                                    </tr>");
+
+                resultRole="";
+            }
         });
 
 
@@ -129,3 +137,24 @@ async function sendRequest() {
 // $("#userAuthorities").val("3");
 // document.querySelector("#userMoney1").innerHTML=money;
 
+//         if (users[i].role) {
+
+// for (let j=0; j<=users[i].role.length; j++){
+//     role1+=JSON.stringify(users[i].role[j]);
+
+//       }
+
+// let users111 = '';
+//
+// users.forEach((value, key) => {
+//     //JSON.stringify(users[i].role[j])
+//
+//     let lll = users.role;
+//     alert(lll.forEach((value) => console.log(value)));
+//
+// })
+// for (let i in users) {
+//     for (let j in users.role[i]) {
+//
+//         //users111 += users.role.forEach();
+//     }

@@ -119,6 +119,7 @@ public class User implements UserDetails {
         this.role = roles;
     }
 
+    
     @Override
     public Collection<Role> getAuthorities()  {
         return role;
