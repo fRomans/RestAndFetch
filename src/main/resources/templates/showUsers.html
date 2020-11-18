@@ -89,7 +89,9 @@
                                                     th:data-money="${user.getMoney()}"
                                                     th:data-password="${user.getPassword()}"
                                                     th:data-authorities="${user.getAuthorities()}"
-                                                    th:data-id="${user.getId()}">Edit
+                                                    th:data-id="${user.getId()}"
+                                                    th:data-flag="edit"
+                                            >Edit
                                             </button>
 
                                         </td>
@@ -102,7 +104,9 @@
                                                     th:data-money="${user.getMoney()}"
                                                     th:data-password="${user.getPassword()}"
                                                     th:data-authorities="${user.getAuthorities()}"
-                                                    th:data-id="${user.getId()}">Delete
+                                                    th:data-id="${user.getId()}"
+                                                    th:data-flag="delete"
+                                            >Delete
                                             </button>
 
                                         </td>
@@ -234,7 +238,7 @@
                                                 <div class="col-md-1"></div>
                                                 <div class="col-md-10">
 
-                                                    <form action="/admin/delete" method="post">
+                                                    <form id="deleteForm" action="/admin/delete" method="post">
 
                                                         <input type="hidden" th:name="deleteId"
                                                                id="inputIdDelete">
@@ -311,8 +315,10 @@
                                                                 </button>
                                                             </div>
                                                             <div class="col-md-5">
-                                                                <button type="submit"
-                                                                        class="btn btn-danger btn-block">
+                                                                <button type="button" id="buttonDelete"
+                                                                        onclick="sendRequest()"
+                                                                        class="btn btn-danger btn-block"
+                                                                        data-dismiss="modal">
                                                                     <h8>Delete</h8>
                                                                 </button>
                                                             </div>

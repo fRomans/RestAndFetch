@@ -1,3 +1,5 @@
+let flag;
+let urlForFetch;
 $('#ModalEdit').on('show.bs.modal', function (event) {
     let elementId = $(event.relatedTarget).data('id');
     let elementName = $(event.relatedTarget).data('name');
@@ -6,7 +8,7 @@ $('#ModalEdit').on('show.bs.modal', function (event) {
     let elementPassword = $(event.relatedTarget).data('password');
     let elementMoney = $(event.relatedTarget).data('money');
     let elementAuthorities = $(event.relatedTarget).data('authorities');
-
+    flag = $(event.relatedTarget).data('flag');
 
     if (elementAuthorities === "[ROLE_ADMIN, ROLE_USER]" || elementAuthorities === "[ROLE_USER, ROLE_ADMIN]") {
         $('#select option[value="ROLE_ADMIN,ROLE_USER"]').prop('selected', true);
@@ -23,11 +25,12 @@ $('#ModalEdit').on('show.bs.modal', function (event) {
     $("#inputMoney").val(elementMoney);
 });
 
-$('#ModalDelete').on('show.bs.modal', function Delete(event) {
+$('#ModalDelete').on('show.bs.modal', function (event) {
     let elementId = $(event.relatedTarget).data('id');
     let elementName = $(event.relatedTarget).data('name');
     let elementMoney = $(event.relatedTarget).data('money');
     let elementAuthorities = $(event.relatedTarget).data('authorities');
+    flag = $(event.relatedTarget).data('flag');
 
     $("#inputNameDelete").val(elementName);
     $("#inputIdDelete").val(elementId);
@@ -42,20 +45,36 @@ const headers = {
 }
 
 
+
+
 async function sendRequest() {
-    let id = document.forms['editForm'].elements['inputId'].value;
-    let name = document.forms['editForm'].elements['inputName'].value;
-    let pass = document.forms['editForm'].elements['inputPassword'].value;
-    let money = document.forms['editForm'].elements['inputMoney'].value;
-    let role = document.forms['editForm'].elements['select'].value;
+    let id ;
+    let name ;
+    let pass ;
+    let money ;
+    let role ;
 
-
-    let rawResponse = await fetch('/admin/update',
+     if (flag == "edit") {
+         urlForFetch = "/admin/update";
+          id = document.forms['editForm'].elements['inputId'].value;
+          name = document.forms['editForm'].elements['inputName'].value;
+          pass = document.forms['editForm'].elements['inputPassword'].value;
+          money = document.forms['editForm'].elements['inputMoney'].value;
+          role = document.forms['editForm'].elements['select'].value;
+     } else if (flag == "delete") {
+         urlForFetch = "/admin/delete";
+          id = document.forms['deleteForm'].elements['inputIdDelete'].value;
+          name = document.forms['deleteForm'].elements['inputNameDelete'].value;
+          pass = document.forms['deleteForm'].elements['inputPasswordDelete'].value;
+          money = document.forms['deleteForm'].elements['inputMoneyDelete'].value;
+          role = document.forms['deleteForm'].elements['selectDelete'].value;
+     }
+    let rawResponseEdit = await fetch( urlForFetch,
         {
             method: "POST",
             headers: {
                 Accept: 'application/json',
-                'Content-Type': 'application/json;charset=utf-8'
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 id: id,
@@ -81,48 +100,59 @@ async function sendRequest() {
 
 
                 for (let j = 0; j < users[i].role.length; j++) {
-                    resultRole += JSON.stringify(users[i].role[j]['authority']);
+                    if (j == 0) {
+                        resultRole += JSON.stringify(users[i].role[j]['authority']);
+                    } else if (j > 0) {
+                        resultRole += "," + JSON.stringify(users[i].role[j]['authority']);
+                    }
                 }
-                    $('#showAllUserForm tbody').append("<tr>\n" +
-                        "                                        <td>" + users[i].id + "</td>\n" +
-                        "                                        <td>" + users[i].name + "</td>\n" +
-                        "                                        <td>" + users[i].money + "</td>\n" +
-                        "                                        <td>" + resultRole + "</td>\n" +
-                        "\n" +
-                        "                                        <td>\n" +
-                        "\n" +
-                        "                                            <button type=\"submit\"\n" +
-                        "                                                    class=\"btn btn-info btn-md\" data-toggle=\"modal\"\n" +
-                        "                                                    data-target=\"#ModalEdit\"\n" +
-                        "                                                    data-name=" + users[i].name + "\n" +
-                        "                                                    data-money=" + users[i].money + "\n" +
-                        "                                                    data-authorities=" + users[i].role + "\n" +
-                        "                                                    data-id=" + users[i].id + "\n" +
-                        ">Edit\n" +
-                        "                                            </button>\n" +
-                        "\n" +
-                        "                                        </td>\n" +
-                        "                                        <td>\n" +
-                        "\n" +
-                        "                                            <button type=\"submit\"\n" +
-                        "                                                    class=\"btn btn-danger btn-md\" data-toggle=\"modal\"\n" +
-                        "                                                    data-target=\"#ModalDelete\"\n" +
-                        "                                                    th:data-name=\"${user.getUsername()}\"\n" +
-                        "                                                    th:data-money=\"${user.getMoney()}\"\n" +
-                        "                                                    th:data-password=\"${user.getPassword()}\"\n" +
-                        "                                                    th:data-authorities=\"${user.getAuthorities()}\"\n" +
-                        "                                                    th:data-id=\"${user.getId()}\">Delete\n" +
-                        "                                            </button>\n" +
-                        "\n" +
-                        "                                        </td>\n" +
-                        "                                    </tr>");
 
-                resultRole="";
+                $('#showAllUserForm tbody').append("<tr>\n" +
+                    "                                        <td>" + users[i].id + "</td>\n" +
+                    "                                        <td>" + users[i].name + "</td>\n" +
+                    "                                        <td>" + users[i].money + "</td>\n" +
+                    "                                        <td>" + resultRole + "</td>\n" +
+                    "\n" +
+                    "                                        <td>\n" +
+                    "\n" +
+                    "                                            <button type=\"submit\"\n" +
+                    "                                                    class=\"btn btn-info btn-md\" data-toggle=\"modal\"\n" +
+                    "                                                    data-target=\"#ModalEdit\"\n" +
+                    "                                                    data-name=" + users[i].name + "\n" +
+                    "                                                    data-money=" + users[i].money + "\n" +
+                    "                                                    data-authorities=" + resultRole + "\n" +
+                    "                                                    data-id=" + users[i].id + "\n" +
+                    "                                                    data-flag="+"edit" + "\n" +
+                    ">Edit\n" +
+                    "                                            </button>\n" +
+                    "\n" +
+                    "                                        </td>\n" +
+                    "                                        <td>\n" +
+                    "\n" +
+                    "                                            <button type=\"submit\"\n" +
+                    "                                                    class=\"btn btn-danger btn-md\" data-toggle=\"modal\"\n" +
+                    "                                                    data-target=\"#ModalDelete\"\n" +
+                    "                                                    data-name=" + users[i].name + "\n" +
+                    "                                                    data-money=" + users[i].money + "\n" +
+                    "                                                    data-authorities=" + resultRole + "\n" +
+                    "                                                    data-id=" + users[i].id + "\n" +
+                    "                                                    data-flag="+"delete" + "\n" +
+                    ">Delete\n" +
+                    "                                            </button>\n" +
+                    "\n" +
+                    "                                        </td>\n" +
+                    "                                    </tr>");
+
+                resultRole = "";
             }
         });
-
-
 };
+
+// if (flag == "edit") {
+//     urlForFetch = '/admin/update';
+// } else if (flag == "delete") {
+//     urlForFetch = '/admin/delete';
+// }
 
 // $("#load").html(msg);
 

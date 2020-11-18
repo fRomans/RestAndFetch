@@ -45,22 +45,22 @@ public class UserService  {
         }
         userUpdate.setMoney(user.getMoney());
         userUpdate.setRoles(role);
-        userRepos.flush();
+        userRepos.save(userUpdate);
         return userUpdate;
     }
 
-    public User UserUpdateService2(User user) {
-        Long searchUserById = user.getId();
-        User userUpdate = userRepos.findById(searchUserById).get();
-        userUpdate.setName(user.getUsername());
-        if (!user.getPassword().equals("")) {
-            userUpdate.setPassword(passwordEncoder.encode(user.getPassword()));
-        }
-        userUpdate.setMoney(user.getMoney());
-        userUpdate.setRoles((Set<Role>) user.getAuthorities());
-        userRepos.flush();
-        return userUpdate;
-    }
+//    public User UserUpdateServiceAfterUpdate(User user) {
+//        Long searchUserById = user.getId();
+//        User userUpdate = userRepos.findById(searchUserById).get();
+//        userUpdate.setName(user.getUsername());
+//        if (!user.getPassword().equals("")) {
+//            userUpdate.setPassword(passwordEncoder.encode(user.getPassword()));
+//        }
+//        userUpdate.setMoney(user.getMoney());
+//        userUpdate.setRoles((Set<Role>) user.getAuthorities());
+//        userRepos.save(userUpdate);
+//        return userUpdate;
+//    }
 
     public User findByIdService(Long id) {
 

@@ -75,11 +75,11 @@ public class AdminController extends HttpServlet {
         return "redirect:/admin";//todo   привести  к такому виду!!!/
     }
 
-    @PostMapping("/delete")
-    public String getDeleteUser(@RequestParam(value = "deleteId") Long id) {
-        userService.deleteByIdService(id);
-        return "redirect:/admin";
-    }
+//    @PostMapping("/delete")
+//    public String getDeleteUser(@RequestParam(value = "deleteId") Long id) {
+//        userService.deleteByIdService(id);
+//        return "redirect:/admin";
+//    }
 
 
 //    @PostMapping("/update")
