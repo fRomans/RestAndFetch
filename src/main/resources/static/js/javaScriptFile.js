@@ -105,41 +105,41 @@ async function sendRequest() {
                     }
                 }
 
-                $('#showAllUserForm tbody').append("<tr>\n" +
-                    "                                        <td>" + users[i].id + "</td>\n" +
-                    "                                        <td>" + users[i].name + "</td>\n" +
-                    "                                        <td>" + users[i].money + "</td>\n" +
-                    "                                        <td>" + resultRole + "</td>\n" +
-                    "\n" +
-                    "                                        <td>\n" +
-                    "\n" +
-                    "                                            <button type=\"submit\"\n" +
-                    "                                                    class=\"btn btn-info btn-md\" data-toggle=\"modal\"\n" +
-                    "                                                    data-target=\"#ModalEdit\"\n" +
-                    "                                                    data-name=" + users[i].name + "\n" +
-                    "                                                    data-money=" + users[i].money + "\n" +
-                    "                                                    data-authorities=" + resultRole + "\n" +
-                    "                                                    data-id=" + users[i].id + "\n" +
-                    "                                                    data-flag=" + "edit" + "\n" +
-                    ">Edit\n" +
-                    "                                            </button>\n" +
-                    "\n" +
-                    "                                        </td>\n" +
-                    "                                        <td>\n" +
-                    "\n" +
-                    "                                            <button type=\"submit\"\n" +
-                    "                                                    class=\"btn btn-danger btn-md\" data-toggle=\"modal\"\n" +
-                    "                                                    data-target=\"#ModalDelete\"\n" +
-                    "                                                    data-name=" + users[i].name + "\n" +
-                    "                                                    data-money=" + users[i].money + "\n" +
-                    "                                                    data-authorities=" + resultRole + "\n" +
-                    "                                                    data-id=" + users[i].id + "\n" +
-                    "                                                    data-flag=" + "delete" + "\n" +
-                    ">Delete\n" +
-                    "                                            </button>\n" +
-                    "\n" +
-                    "                                        </td>\n" +
-                    "                                    </tr>");
+                $('#showAllUserForm tbody').append(`<tr>
+                                                            <td>${users[i].id}</td>\n" +
+                                                            <td>${users[i].name}</td>\n" +
+                                                            <td> ${users[i].money}</td>
+                                                           <td>${resultRole}"</td>
+                    
+                                                           <td>
+                    
+                                                                <button type="submit\"
+                                                                       class="btn btn-info btn-md" data-toggle="modal"
+                                                                        data-target="#ModalEdit"
+                                                                      data-name="${users[i].name}"
+                                                                        data-money="${users[i].money}"
+                                                                        data-authorities="${resultRole}"
+                                                                        data-id="${users[i].id}"
+                                                                       data-flag="edit"
+                    >Edit
+                                                                </button>
+                    
+                                                          </td>
+                                                          <td>
+                    
+                                                               <button type="submit"
+                                                                        class="btn btn-danger btn-md" data-toggle="modal"
+                                                                       data-target="#ModalDelete"
+                                                                        data-name="${users[i].name}"
+                                                                       data-money="${users[i].money}"
+                                                                        data-authorities=" ${resultRole}"
+                                                                        data-id="${users[i].id} "
+                                                                       data-flag="delete"
+                    >Delete
+                                                               </button>
+                    
+                                                            </td>
+                                                        </tr>`);
 
                 resultRole = "";
             }
@@ -192,41 +192,41 @@ async function addNewUser() {
                     }
                 }
 
-                $('#showAllUserForm tbody').append("<tr>\n" +
-                    "                                        <td>" + users[i].id + "</td>\n" +
-                    "                                        <td>" + users[i].name + "</td>\n" +
-                    "                                        <td>" + users[i].money + "</td>\n" +
-                    "                                        <td>" + resultRole + "</td>\n" +
-                    "\n" +
-                    "                                        <td>\n" +
-                    "\n" +
-                    "                                            <button type=\"submit\"\n" +
-                    "                                                    class=\"btn btn-info btn-md\" data-toggle=\"modal\"\n" +
-                    "                                                    data-target=\"#ModalEdit\"\n" +
-                    "                                                    data-name=" + users[i].name + "\n" +
-                    "                                                    data-money=" + users[i].money + "\n" +
-                    "                                                    data-authorities=" + resultRole + "\n" +
-                    "                                                    data-id=" + users[i].id + "\n" +
-                    "                                                    data-flag=" + "edit" + "\n" +
-                    ">Edit\n" +
-                    "                                            </button>\n" +
-                    "\n" +
-                    "                                        </td>\n" +
-                    "                                        <td>\n" +
-                    "\n" +
-                    "                                            <button type=\"submit\"\n" +
-                    "                                                    class=\"btn btn-danger btn-md\" data-toggle=\"modal\"\n" +
-                    "                                                    data-target=\"#ModalDelete\"\n" +
-                    "                                                    data-name=" + users[i].name + "\n" +
-                    "                                                    data-money=" + users[i].money + "\n" +
-                    "                                                    data-authorities=" + resultRole + "\n" +
-                    "                                                    data-id=" + users[i].id + "\n" +
-                    "                                                    data-flag=" + "delete" + "\n" +
-                    ">Delete\n" +
-                    "                                            </button>\n" +
-                    "\n" +
-                    "                                        </td>\n" +
-                    "                                    </tr>");
+                $('#showAllUserForm tbody').append(`
+                                     <tr>
+                                       <td>${users[i].id}</td>
+                                       <td>${users[i].name}</td>
+                                       <td>${users[i].money}</td>
+                                       <td>${resultRole}</td>
+                                       <td>
+
+                                           <button type="submit" +
+                                                    class="btn btn-info btn-md" data-toggle="modal" 
+                                                    data-target="#ModalEdit"
+                                                    data-name="${users[i].name} "
+                                                    data-money=" ${users[i].money}"
+                                                    data-authorities="${resultRole}"
+                                                    data-id="${users[i].id}"
+                                                   data-flag="edit"
+                                           >Edit</button>
+                                            
+
+                                       </td>
+                                       <td>
+
+                                        <button type="submit"
+                                                  class="btn btn-danger btn-md" data-toggle="modal"
+                                                  data-target=\\"#ModalDelete\\"
+                                                data-name="${users[i].name}"
+                                                data-money="${users[i].money}" 
+                                                data-id="${users[i].id}"
+                                                data-authorities="${resultRole}"
+                                                    data-flag="delete" 
+                                        >Delete</button>
+
+                                       </td>
+                                     </tr>                                    
+                                  `);
 
                 resultRole = "";
             }
@@ -235,6 +235,43 @@ async function addNewUser() {
 
 
 }
+
+
+// "<tr>\n" +
+// "                                        <td>" + users[i].id + "</td>\n" +
+// "                                        <td>" + users[i].name + "</td>\n" +
+// "                                        <td>" + users[i].money + "</td>\n" +
+// "                                        <td>" + resultRole + "</td>\n" +
+// "\n" +
+// "                                        <td>\n" +
+// "\n" +
+// "                                            <button type=\"submit\"\n" +
+// "                                                    class=\"btn btn-info btn-md\" data-toggle=\"modal\"\n" +
+// "                                                    data-target=\"#ModalEdit\"\n" +
+// "                                                    data-name=" + users[i].name + "\n" +
+// "                                                    data-money=" + users[i].money + "\n" +
+// "                                                    data-authorities=" + resultRole + "\n" +
+// "                                                    data-id=" + users[i].id + "\n" +
+// "                                                    data-flag=" + "edit" + "\n" +
+// ">Edit\n" +
+// "                                            </button>\n" +
+// "\n" +
+// "                                        </td>\n" +
+// "                                        <td>\n" +
+// "\n" +
+// "                                            <button type=\"submit\"\n" +
+// "                                                    class=\"btn btn-danger btn-md\" data-toggle=\"modal\"\n" +
+// "                                                    data-target=\"#ModalDelete\"\n" +
+// "                                                    data-name=" + users[i].name + "\n" +
+// "                                                    data-money=" + users[i].money + "\n" +
+// "                                                    data-authorities=" + resultRole + "\n" +
+// "                                                    data-id=" + users[i].id + "\n" +
+// "                                                    data-flag=" + "delete" + "\n" +
+// ">Delete\n" +
+// "                                            </button>\n" +
+// "\n" +
+// "                                        </td>\n" +
+// "                                    </tr>"
 
 
 // if (flag == "edit") {
