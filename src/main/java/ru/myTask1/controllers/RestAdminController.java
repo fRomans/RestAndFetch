@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.myTask1.DTO.UserConverter;
@@ -78,6 +79,23 @@ public class RestAdminController extends HttpServlet {
         User user = userConverter.dtoToEntity(userDTO);
         Long id = user.getId();
         userService.deleteByIdService(id);
+        List<User> users = userService.findAllService();
+        List<UserDTO> usersDTO = userConverter.entityToDto(users);
+        return usersDTO;
+    }
+
+    @PostMapping(value ="/add")
+    public List<UserDTO> addUser(@RequestBody UserDTO userDTO) {
+        //Set<Role> role = userDTO.getRole();//попробовать без отдельного вызова ролей
+        User user = userConverter.dtoToEntity(userDTO);
+
+        //user.setRoles(role);
+
+        String password = user.getPassword();
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String hashedPassword = passwordEncoder.encode(password);
+        user.setPassword(hashedPassword);
+        userService.saveService(user);
         List<User> users = userService.findAllService();
         List<UserDTO> usersDTO = userConverter.entityToDto(users);
         return usersDTO;

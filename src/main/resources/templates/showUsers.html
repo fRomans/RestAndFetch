@@ -28,7 +28,7 @@
 <div class="row container-fluid" id="idRow1">
 
     <div class="col-md-2 " id="divMainUl">
-
+<div class="row">1</div>
         <ul class="nav nav-pills" role="tablist" id="ul">
             <li class="nav-item " id="li1"><a href="#idAdmin" class="nav-link active" role="tab" data-toggle="pill">Admin</a>
             </li>
@@ -36,6 +36,7 @@
 
         </ul>
     </div>
+
     <div class="col-md-10" id="idInfo">
         <div class="tab-content" id="divTabContent">
 
@@ -45,7 +46,7 @@
 
                 <div class="container-fluid">
                     <ul class="nav nav-tabs" role="tablist">
-                        <li class="nav-item"><a href="#adminPanelShow" class="nav-link active" role="tab"
+                        <li class="nav-item"><a href="#adminPanelShow" class="nav-link active" role="tab" id="togglePaneAdminPanelShow"
                                                 data-toggle="tab">Users table</a></li>
                         <li class="nav-item"><a href="#addUser" class="nav-link" role="tab" data-toggle="tab">New
                             User</a></li>
@@ -78,7 +79,7 @@
                                         <td id="userId" th:text="${user.getId()}"></td>
                                         <td id="userUsername" th:text="${user.getUsername()}"></td>
                                         <td id="userMoney" th:text="${user.getMoney()}"></td>
-                                        <td id="userAuthorities" th:text="${user.getAuthorities()}"></td>
+                                        <td id="userAuthorities" th:text="${{user.getAuthorities()}}"></td>
 
                                         <td>
 
@@ -340,8 +341,9 @@
                         <div class="row" id="addDiv">
                             <div class="col-md-4"></div>
                             <div class="col-md-3">
-                                <form action="/admin/add" method="post">
-
+                                <form id="addForm" action="/admin/add" method="post">
+<!--                                    <input type="hidden" th:name="id"-->
+<!--                                           id="addId">-->
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-md-4"></div>
@@ -351,7 +353,8 @@
                                             <div class="col-md-4"></div>
                                         </div>
                                         <input required type="text" th:name="name" placeholder="имя"
-                                               class="form-control">
+                                               class="form-control"
+                                               id="addName">
                                     </div>
 
                                     <div class=”form-group”>
@@ -363,7 +366,8 @@
                                             <div class="col-md-4"></div>
                                         </div>
                                         <input required type="text" th:name="password" placeholder="пароль"
-                                               class="form-control">
+                                               class="form-control"
+                                               id="addPassword">
                                     </div>
 
                                     <div class=”form-group”>
@@ -375,7 +379,8 @@
                                             <div class="col-md-4"></div>
                                         </div>
                                         <input required type="text" th:name="money" placeholder="деньги"
-                                               class="form-control">
+                                               class="form-control"
+                                               id="addMoney">
                                     </div>
 
                                     <div class=”form-group”>
@@ -386,7 +391,8 @@
                                             </div>
                                             <div class="col-md-4"></div>
                                         </div>
-                                        <select class="form-control" name="role_id">
+                                        <select class="form-control" name="role_id"
+                                                id="selectAdd">
                                             <option id="role1" value="ROLE_ADMIN">ROLE_ADMIN</option>
                                             <option id="role2" value="ROLE_USER">ROLE_USER</option>
                                             <option id="role3" value="ROLE_ADMIN,ROLE_USER">ROLE_ADMIN,ROLE_USER
@@ -398,7 +404,9 @@
                                     <div class="row">
                                         <div class="col-md-1"></div>
                                         <div class="col-md-9">
-                                            <button type="submit" class="btn btn-success btn-block">
+                                            <button type="button" class="btn btn-success btn-block"
+                                                    id="buttonAdd"
+                                                    onclick="addNewUser()">
                                                 <h8>Add new user</h8>
                                             </button>
                                         </div>

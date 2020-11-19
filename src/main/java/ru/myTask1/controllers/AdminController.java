@@ -4,10 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
 import ru.myTask1.domain.Role;
 import ru.myTask1.domain.User;
 import ru.myTask1.service.UserService;
@@ -63,17 +64,17 @@ public class AdminController extends HttpServlet {
     }
 
 
-    @PostMapping("/add")
-    public String addUser(@ModelAttribute User user, @RequestParam(value = "role_id") Set<Role> role) {
-        user.setRoles(role);
-
-        String password = user.getPassword();
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String hashedPassword = passwordEncoder.encode(password);
-        user.setPassword(hashedPassword);
-        userService.saveService(user);
-        return "redirect:/admin";//todo   привести  к такому виду!!!/
-    }
+//    @PostMapping("/add")
+//    public String addUser(@ModelAttribute User user, @RequestParam(value = "role_id") Set<Role> role) {
+//        user.setRoles(role);
+//
+//        String password = user.getPassword();
+//        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+//        String hashedPassword = passwordEncoder.encode(password);
+//        user.setPassword(hashedPassword);
+//        userService.saveService(user);
+//        return "redirect:/admin";//todo   привести  к такому виду!!!/
+//    }
 
 //    @PostMapping("/delete")
 //    public String getDeleteUser(@RequestParam(value = "deleteId") Long id) {

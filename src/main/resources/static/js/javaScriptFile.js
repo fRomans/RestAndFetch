@@ -45,31 +45,29 @@ const headers = {
 }
 
 
-
-
 async function sendRequest() {
-    let id ;
-    let name ;
-    let pass ;
-    let money ;
-    let role ;
+    let id;
+    let name;
+    let pass;
+    let money;
+    let role;
 
-     if (flag == "edit") {
-         urlForFetch = "/admin/update";
-          id = document.forms['editForm'].elements['inputId'].value;
-          name = document.forms['editForm'].elements['inputName'].value;
-          pass = document.forms['editForm'].elements['inputPassword'].value;
-          money = document.forms['editForm'].elements['inputMoney'].value;
-          role = document.forms['editForm'].elements['select'].value;
-     } else if (flag == "delete") {
-         urlForFetch = "/admin/delete";
-          id = document.forms['deleteForm'].elements['inputIdDelete'].value;
-          name = document.forms['deleteForm'].elements['inputNameDelete'].value;
-          pass = document.forms['deleteForm'].elements['inputPasswordDelete'].value;
-          money = document.forms['deleteForm'].elements['inputMoneyDelete'].value;
-          role = document.forms['deleteForm'].elements['selectDelete'].value;
-     }
-    let rawResponseEdit = await fetch( urlForFetch,
+    if (flag == "edit") {
+        urlForFetch = "/admin/update";
+        id = document.forms['editForm'].elements['inputId'].value;
+        name = document.forms['editForm'].elements['inputName'].value;
+        pass = document.forms['editForm'].elements['inputPassword'].value;
+        money = document.forms['editForm'].elements['inputMoney'].value;
+        role = document.forms['editForm'].elements['select'].value;
+    } else if (flag == "delete") {
+        urlForFetch = "/admin/delete";
+        id = document.forms['deleteForm'].elements['inputIdDelete'].value;
+        name = document.forms['deleteForm'].elements['inputNameDelete'].value;
+        pass = document.forms['deleteForm'].elements['inputPasswordDelete'].value;
+        money = document.forms['deleteForm'].elements['inputMoneyDelete'].value;
+        role = document.forms['deleteForm'].elements['selectDelete'].value;
+    }
+    let rawResponseEdit = await fetch(urlForFetch,
         {
             method: "POST",
             headers: {
@@ -122,7 +120,7 @@ async function sendRequest() {
                     "                                                    data-money=" + users[i].money + "\n" +
                     "                                                    data-authorities=" + resultRole + "\n" +
                     "                                                    data-id=" + users[i].id + "\n" +
-                    "                                                    data-flag="+"edit" + "\n" +
+                    "                                                    data-flag=" + "edit" + "\n" +
                     ">Edit\n" +
                     "                                            </button>\n" +
                     "\n" +
@@ -136,7 +134,7 @@ async function sendRequest() {
                     "                                                    data-money=" + users[i].money + "\n" +
                     "                                                    data-authorities=" + resultRole + "\n" +
                     "                                                    data-id=" + users[i].id + "\n" +
-                    "                                                    data-flag="+"delete" + "\n" +
+                    "                                                    data-flag=" + "delete" + "\n" +
                     ">Delete\n" +
                     "                                            </button>\n" +
                     "\n" +
@@ -147,6 +145,97 @@ async function sendRequest() {
             }
         });
 };
+
+
+async function addNewUser() {
+
+    // let id = document.forms['addForm'].elements['addId'].value;
+    let name = document.forms['addForm'].elements['addName'].value;
+    let pass = document.forms['addForm'].elements['addPassword'].value;
+    let money = document.forms['addForm'].elements['addMoney'].value;
+    let role = document.forms['addForm'].elements['selectAdd'].value;
+
+    let rawResponseAdd = await fetch("/admin/add",
+        {
+            method: "POST",
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                // id: id,
+                name: name,
+                password: pass,
+                money: money,
+                role: [role]
+            }),
+        })
+        .then(function (response) {
+            console.log(response);
+            return response.json();
+        })
+        .then(function showTable(data) {
+
+
+            $("#showAllUserForm tbody > tr").empty();
+
+            let users = data;
+            let resultRole = "";
+            for (let i = 0; i < users.length; i++) {
+
+
+                for (let j = 0; j < users[i].role.length; j++) {
+                    if (j == 0) {
+                        resultRole += JSON.stringify(users[i].role[j]['authority']);
+                    } else if (j > 0) {
+                        resultRole += "," + JSON.stringify(users[i].role[j]['authority']);
+                    }
+                }
+
+                $('#showAllUserForm tbody').append("<tr>\n" +
+                    "                                        <td>" + users[i].id + "</td>\n" +
+                    "                                        <td>" + users[i].name + "</td>\n" +
+                    "                                        <td>" + users[i].money + "</td>\n" +
+                    "                                        <td>" + resultRole + "</td>\n" +
+                    "\n" +
+                    "                                        <td>\n" +
+                    "\n" +
+                    "                                            <button type=\"submit\"\n" +
+                    "                                                    class=\"btn btn-info btn-md\" data-toggle=\"modal\"\n" +
+                    "                                                    data-target=\"#ModalEdit\"\n" +
+                    "                                                    data-name=" + users[i].name + "\n" +
+                    "                                                    data-money=" + users[i].money + "\n" +
+                    "                                                    data-authorities=" + resultRole + "\n" +
+                    "                                                    data-id=" + users[i].id + "\n" +
+                    "                                                    data-flag=" + "edit" + "\n" +
+                    ">Edit\n" +
+                    "                                            </button>\n" +
+                    "\n" +
+                    "                                        </td>\n" +
+                    "                                        <td>\n" +
+                    "\n" +
+                    "                                            <button type=\"submit\"\n" +
+                    "                                                    class=\"btn btn-danger btn-md\" data-toggle=\"modal\"\n" +
+                    "                                                    data-target=\"#ModalDelete\"\n" +
+                    "                                                    data-name=" + users[i].name + "\n" +
+                    "                                                    data-money=" + users[i].money + "\n" +
+                    "                                                    data-authorities=" + resultRole + "\n" +
+                    "                                                    data-id=" + users[i].id + "\n" +
+                    "                                                    data-flag=" + "delete" + "\n" +
+                    ">Delete\n" +
+                    "                                            </button>\n" +
+                    "\n" +
+                    "                                        </td>\n" +
+                    "                                    </tr>");
+
+                resultRole = "";
+            }
+        });
+    $('#togglePaneAdminPanelShow').tab('show');
+
+
+}
+
 
 // if (flag == "edit") {
 //     urlForFetch = '/admin/update';
