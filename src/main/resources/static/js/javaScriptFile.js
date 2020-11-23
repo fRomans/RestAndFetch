@@ -3,8 +3,6 @@ let urlForFetch;
 $('#ModalEdit').on('show.bs.modal', function (event) {
     let elementId = $(event.relatedTarget).data('id');
     let elementName = $(event.relatedTarget).data('name');
-    // debugger
-    // if (условие)debugger
     let elementPassword = $(event.relatedTarget).data('password');
     let elementMoney = $(event.relatedTarget).data('money');
     let elementAuthorities = $(event.relatedTarget).data('authorities');
@@ -236,80 +234,3 @@ async function addNewUser() {
 };
 
 
-// "<tr>\n" +
-// "                                        <td>" + users[i].id + "</td>\n" +
-// "                                        <td>" + users[i].name + "</td>\n" +
-// "                                        <td>" + users[i].money + "</td>\n" +
-// "                                        <td>" + resultRole + "</td>\n" +
-// "\n" +
-// "                                        <td>\n" +
-// "\n" +
-// "                                            <button type=\"submit\"\n" +
-// "                                                    class=\"btn btn-info btn-md\" data-toggle=\"modal\"\n" +
-// "                                                    data-target=\"#ModalEdit\"\n" +
-// "                                                    data-name=" + users[i].name + "\n" +
-// "                                                    data-money=" + users[i].money + "\n" +
-// "                                                    data-authorities=" + resultRole + "\n" +
-// "                                                    data-id=" + users[i].id + "\n" +
-// "                                                    data-flag=" + "edit" + "\n" +
-// ">Edit\n" +
-// "                                            </button>\n" +
-// "\n" +
-// "                                        </td>\n" +
-// "                                        <td>\n" +
-// "\n" +
-// "                                            <button type=\"submit\"\n" +
-// "                                                    class=\"btn btn-danger btn-md\" data-toggle=\"modal\"\n" +
-// "                                                    data-target=\"#ModalDelete\"\n" +
-// "                                                    data-name=" + users[i].name + "\n" +
-// "                                                    data-money=" + users[i].money + "\n" +
-// "                                                    data-authorities=" + resultRole + "\n" +
-// "                                                    data-id=" + users[i].id + "\n" +
-// "                                                    data-flag=" + "delete" + "\n" +
-// ">Delete\n" +
-// "                                            </button>\n" +
-// "\n" +
-// "                                        </td>\n" +
-// "                                    </tr>"
-
-
-// if (flag == "edit") {
-//     urlForFetch = '/admin/update';
-// } else if (flag == "delete") {
-//     urlForFetch = '/admin/delete';
-// }
-
-// $("#load").html(msg);
-
-// const content = await rawResponse.json();
-// console.log(content);
-
-// document.querySelector("#userId").innerHTML="y"
-//
-// $("#userId").val("3");
-// $("#userUsername").val("3");
-// $("#userMoney").val("3");
-// $("#userAuthorities").val("3");
-// document.querySelector("#userMoney1").innerHTML=money;
-
-//         if (users[i].role) {
-
-// for (let j=0; j<=users[i].role.length; j++){
-//     role1+=JSON.stringify(users[i].role[j]);
-
-//       }
-
-// let users111 = '';
-//
-// users.forEach((value, key) => {
-//     //JSON.stringify(users[i].role[j])
-//
-//     let lll = users.role;
-//     alert(lll.forEach((value) => console.log(value)));
-//
-// })
-// for (let i in users) {
-//     for (let j in users.role[i]) {
-//
-//         //users111 += users.role.forEach();
-//     }

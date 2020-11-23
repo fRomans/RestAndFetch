@@ -1,0 +1,45 @@
+
+.divTable, #addDiv {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-right: 30px;
+    margin-left: 15px;
+
+    padding-top: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+
+    background-color: #ffffff
+}
+
+#divTabContent {
+    background-color: #ebebe0;
+    height: 100vh;
+}
+
+#idRow1 {
+    height: 100vh;
+}
+
+#li1, #li2 {
+    flex: 100%;
+}
+
+#ul {
+    /*display: flex;*/
+}
+#idInfo{
+    padding: 0;
+}
+#divMainUl{
+    clear: both;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#adminH1,#addUserH1 {
+    padding-left: 15px;
+}
+

@@ -7,52 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <style>
-        .divTable, #addDiv {
-            margin-top: 15px;
-            margin-bottom: 15px;
-            margin-right: 30px;
-            margin-left: 15px;
-
-            padding-top: 15px;
-            padding-right: 15px;
-            padding-bottom: 15px;
-            padding-left: 15px;
-
-            background-color: #ffffff
-        }
-
-        #divTabContent {
-            background-color: #ebebe0;
-            height: 100vh;
-        }
-
-        #idRow1 {
-            height: 100vh;
-        }
-
-        #li1, #li2 {
-            flex: 100%;
-        }
-
-        #ul {
-            /*display: flex;*/
-        }
-        #idInfo{
-            padding: 0;
-        }
-        #divMainUl{
-            clear: both;
-            width: 100%;
-            margin: 0;
-            padding: 0;
-        }
-
-        #adminH1,#addUserH1 {
-            padding-left: 15px;
-        }
-
-    </style>
+    <link rel="stylesheet" th:href="@{/js/cssUser.css}" type="text/css"/>
     <title>Список пользователей</title>
 
 </head>
@@ -105,7 +60,7 @@
                                         <td th:text="${user.getId()}"></td>
                                         <td th:text="${user.getUsername()}"></td>
                                         <td th:text="${user.getMoney()}"></td>
-                                        <td th:text="${user.getAuthorities()}"></td>
+                                        <td th:text="${{user.getAuthorities()}}"></td>
 
 
                                     </tr>

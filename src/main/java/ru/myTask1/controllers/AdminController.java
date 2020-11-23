@@ -58,38 +58,10 @@ public class AdminController extends HttpServlet {
         return "showUsers";
     }
 
-    @GetMapping("/add")
-    public String getPage() {
-        return "addUser";
-    }
-
-
-//    @PostMapping("/add")
-//    public String addUser(@ModelAttribute User user, @RequestParam(value = "role_id") Set<Role> role) {
-//        user.setRoles(role);
+//    @GetMapping("/add")
+//    public String getPage() {
+//        return "addUser";
+//    }
 //
-//        String password = user.getPassword();
-//        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-//        String hashedPassword = passwordEncoder.encode(password);
-//        user.setPassword(hashedPassword);
-//        userService.saveService(user);
-//        return "redirect:/admin";//todo   привести  к такому виду!!!/
-//    }
-
-//    @PostMapping("/delete")
-//    public String getDeleteUser(@RequestParam(value = "deleteId") Long id) {
-//        userService.deleteByIdService(id);
-//        return "redirect:/admin";
-//    }
-
-
-//    @PostMapping("/update")
-//    public String getUpdateUser( @ModelAttribute User user, @RequestParam Set<Role> role) {
-//
-
-//        return "redirect:/admin";
-//    }
-
-
 }
 
