@@ -10,11 +10,14 @@ $('#ModalEdit').on('show.bs.modal', function (event) {
     let elementAuthorities = $(event.relatedTarget).data('authorities');
     flag = $(event.relatedTarget).data('flag');
 
-    if (elementAuthorities === "[ROLE_ADMIN, ROLE_USER]" || elementAuthorities === "[ROLE_USER, ROLE_ADMIN]") {
+
+
+    if (elementAuthorities === "[ROLE_ADMIN,ROLE_USER]" || elementAuthorities === "[ROLE_USER,ROLE_ADMIN]" ||
+        elementAuthorities === "[ROLE_ADMIN, ROLE_USER]" || elementAuthorities === "[ROLE_USER, ROLE_ADMIN]"
+    ) {
         $('#select option[value="ROLE_ADMIN,ROLE_USER"]').prop('selected', true);
     } else if (elementAuthorities === "[ROLE_USER]") {
         $('#select option[value="ROLE_USER"]').prop('selected', true);
-
     } else if (elementAuthorities === "[ROLE_ADMIN]") {
         $('#select option[value="ROLE_ADMIN"]').prop('selected', true);
     }
@@ -35,7 +38,13 @@ $('#ModalDelete').on('show.bs.modal', function (event) {
     $("#inputNameDelete").val(elementName);
     $("#inputIdDelete").val(elementId);
     $("#inputMoneyDelete").val(elementMoney);
-    $("#selectDelete").val(elementAuthorities);
+    if (elementAuthorities === "[ROLE_ADMIN,ROLE_USER]" || elementAuthorities === "[ROLE_USER,ROLE_ADMIN]") {
+        $("#selectDelete").val("ROLE_ADMIN,ROLE_USER");
+    } else if (elementAuthorities === "[ROLE_USER]") {
+        $("#selectDelete").val("ROLE_USER");
+    } else if (elementAuthorities === "[ROLE_ADMIN]") {
+        $("#selectDelete").val('ROLE_ADMIN');
+    }
 });
 
 
@@ -93,24 +102,20 @@ async function sendRequest() {
             $("#showAllUserForm tbody > tr").empty();
 
             let users = data;
-            let resultRole = "";
+            let resultRole = [];
             for (let i = 0; i < users.length; i++) {
 
-
                 for (let j = 0; j < users[i].role.length; j++) {
-                    if (j == 0) {
-                        resultRole += JSON.stringify(users[i].role[j]['authority']);
-                    } else if (j > 0) {
-                        resultRole += "," + JSON.stringify(users[i].role[j]['authority']);
-                    }
+                    let roleElement= users[i].role[j]['authority'];
+                        resultRole.push(roleElement) ;
                 }
 
                 $('#showAllUserForm tbody').append(`<tr>
                                                             <td>${users[i].id}</td>\n" +
                                                             <td>${users[i].name}</td>\n" +
                                                             <td> ${users[i].money}</td>
-                                                           <td>${resultRole}"</td>
-                    
+                                                           <td>${resultRole}</td>
+<!--                    ediiiiit      deletteeeeeeeeeee-->
                                                            <td>
                     
                                                                 <button type="submit\"
@@ -118,11 +123,10 @@ async function sendRequest() {
                                                                         data-target="#ModalEdit"
                                                                       data-name="${users[i].name}"
                                                                         data-money="${users[i].money}"
-                                                                        data-authorities="${resultRole}"
+                                                                        data-authorities=[${resultRole}]
                                                                         data-id="${users[i].id}"
                                                                        data-flag="edit"
-                    >Edit
-                                                                </button>
+                                                                                       >Edit</button>
                     
                                                           </td>
                                                           <td>
@@ -132,16 +136,15 @@ async function sendRequest() {
                                                                        data-target="#ModalDelete"
                                                                         data-name="${users[i].name}"
                                                                        data-money="${users[i].money}"
-                                                                        data-authorities=" ${resultRole}"
+                                                                        data-authorities=[${resultRole}]
                                                                         data-id="${users[i].id} "
                                                                        data-flag="delete"
-                    >Delete
-                                                               </button>
+                                                                                       >Delete</button>
                     
                                                             </td>
                                                         </tr>`);
 
-                resultRole = "";
+                resultRole = [];
             }
         });
 };
@@ -180,16 +183,12 @@ async function addNewUser() {
             $("#showAllUserForm tbody > tr").empty();
 
             let users = data;
-            let resultRole = "";
+            let resultRole = [];
             for (let i = 0; i < users.length; i++) {
 
-
                 for (let j = 0; j < users[i].role.length; j++) {
-                    if (j == 0) {
-                        resultRole += JSON.stringify(users[i].role[j]['authority']);
-                    } else if (j > 0) {
-                        resultRole += "," + JSON.stringify(users[i].role[j]['authority']);
-                    }
+                    let roleElement= users[i].role[j]['authority'];
+                    resultRole.push(roleElement) ;
                 }
 
                 $('#showAllUserForm tbody').append(`
@@ -199,13 +198,13 @@ async function addNewUser() {
                                        <td>${users[i].money}</td>
                                        <td>${resultRole}</td>
                                        <td>
-
+<!-- addddddddddddddddddddddddddddddd-->
                                            <button type="submit" +
                                                     class="btn btn-info btn-md" data-toggle="modal" 
                                                     data-target="#ModalEdit"
                                                     data-name="${users[i].name} "
                                                     data-money=" ${users[i].money}"
-                                                    data-authorities="${resultRole}"
+                                                    data-authorities=[${resultRole}]
                                                     data-id="${users[i].id}"
                                                    data-flag="edit"
                                            >Edit</button>
@@ -220,7 +219,7 @@ async function addNewUser() {
                                                 data-name="${users[i].name}"
                                                 data-money="${users[i].money}" 
                                                 data-id="${users[i].id}"
-                                                data-authorities="${resultRole}"
+                                                data-authorities=[${resultRole}]
                                                     data-flag="delete" 
                                         >Delete</button>
 
@@ -228,13 +227,13 @@ async function addNewUser() {
                                      </tr>                                    
                                   `);
 
-                resultRole = "";
+                resultRole = [];;
             }
         });
     $('#togglePaneAdminPanelShow').tab('show');
 
 
-}
+};
 
 
 // "<tr>\n" +
