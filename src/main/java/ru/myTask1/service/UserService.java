@@ -36,9 +36,8 @@ public class UserService  {
     }
 
     public User UserUpdateService(User user, Set<Role> role) {
-        Long hh = user.getId();
-        String nn = user.getUsername();
-        User userUpdate = userRepos.findById(hh).get();
+        Long idUser = user.getId();
+        User userUpdate = userRepos.findById(idUser).get();
         userUpdate.setName(user.getUsername());
         if (!user.getPassword().equals("")) {
             userUpdate.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -49,18 +48,7 @@ public class UserService  {
         return userUpdate;
     }
 
-//    public User UserUpdateServiceAfterUpdate(User user) {
-//        Long searchUserById = user.getId();
-//        User userUpdate = userRepos.findById(searchUserById).get();
-//        userUpdate.setName(user.getUsername());
-//        if (!user.getPassword().equals("")) {
-//            userUpdate.setPassword(passwordEncoder.encode(user.getPassword()));
-//        }
-//        userUpdate.setMoney(user.getMoney());
-//        userUpdate.setRoles((Set<Role>) user.getAuthorities());
-//        userRepos.save(userUpdate);
-//        return userUpdate;
-//    }
+
 
     public User findByIdService(Long id) {
 

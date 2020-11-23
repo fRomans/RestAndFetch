@@ -1,6 +1,7 @@
-package ru.myTask1.DTO;
+package ru.myTask1.service;
 
 import org.springframework.stereotype.Component;
+import ru.myTask1.DTO.UserDTO;
 import ru.myTask1.domain.Role;
 import ru.myTask1.domain.User;
 

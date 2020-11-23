@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.myTask1.DTO.UserConverter;
+import ru.myTask1.service.UserConverter;
 import ru.myTask1.DTO.UserDTO;
 import ru.myTask1.domain.Role;
 import ru.myTask1.domain.User;
