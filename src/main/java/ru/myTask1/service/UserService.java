@@ -48,7 +48,10 @@ public class UserService  {
         return userUpdate;
     }
 
-
+    public  User findByUserName(String username){
+        User user = userRepos.findByName(username);;
+        return user;
+    }
 
     public User findByIdService(Long id) {
 
