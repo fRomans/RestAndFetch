@@ -35,6 +35,13 @@ public class UserService  {
         userRepos.deleteById(id);
     }
 
+    public String UserPasswEncoderService(String password) {
+
+        String hashedPassword = passwordEncoder.encode(password);
+        return hashedPassword;
+    }
+
+
     public User UserUpdateService(User user, Set<Role> role) {
         Long idUser = user.getId();
         User userUpdate = userRepos.findById(idUser).get();

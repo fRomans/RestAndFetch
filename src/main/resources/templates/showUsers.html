@@ -91,7 +91,7 @@
                                                     th:data-password="${user.getPassword()}"
                                                     th:data-authorities="${user.getAuthorities()}"
                                                     th:data-id="${user.getId()}"
-                                                    th:data-flag="edit"
+
                                             >Edit
                                             </button>
 
@@ -106,7 +106,6 @@
                                                     th:data-password="${user.getPassword()}"
                                                     th:data-authorities="${user.getAuthorities()}"
                                                     th:data-id="${user.getId()}"
-                                                    th:data-flag="delete"
                                             >Delete
                                             </button>
 
@@ -209,7 +208,7 @@
                                                             </div>
                                                             <div class="col-md-5">
                                                                 <button type="button" id="buttonEdit"
-                                                                        onclick="sendRequest()"
+                                                                        onclick="editUser()"
                                                                         class="btn btn-success btn-block"
                                                                         data-dismiss="modal">
                                                                     <h8>Edit</h8>
@@ -317,7 +316,7 @@
                                                             </div>
                                                             <div class="col-md-5">
                                                                 <button type="button" id="buttonDelete"
-                                                                        onclick="sendRequest()"
+                                                                        onclick="deleteUser()()"
                                                                         class="btn btn-danger btn-block"
                                                                         data-dismiss="modal">
                                                                     <h8>Delete</h8>

@@ -1,7 +1,6 @@
 package ru.myTask1.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,8 +45,6 @@ public class RestAdminController extends HttpServlet {
         Set<Role> role = userDTO.getRole();
         User user = userConverter.dtoToEntity(userDTO);
         User userUpdate = userService.UserUpdateService(user,role);
-        //userService.saveService(userUpdate);
-        userDTO = userConverter.entityToDto(userUpdate);
         List<User> users = userService.findAllService();
         List<UserDTO> usersDTO = userConverter.entityToDto(users);
         return usersDTO;
@@ -66,14 +63,9 @@ public class RestAdminController extends HttpServlet {
 
     @PostMapping(value ="/add")
     public List<UserDTO> addUser(@RequestBody UserDTO userDTO) {
-        //Set<Role> role = userDTO.getRole();//попробовать без отдельного вызова ролей
         User user = userConverter.dtoToEntity(userDTO);
-
-        //user.setRoles(role);
-
         String password = user.getPassword();
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String hashedPassword = passwordEncoder.encode(password);
+        String hashedPassword = userService.UserPasswEncoderService(password);
         user.setPassword(hashedPassword);
         userService.saveService(user);
         List<User> users = userService.findAllService();

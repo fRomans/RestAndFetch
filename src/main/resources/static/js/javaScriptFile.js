@@ -9,7 +9,6 @@ $('#ModalEdit').on('show.bs.modal', function (event) {
     flag = $(event.relatedTarget).data('flag');
 
 
-
     if (elementAuthorities === "[ROLE_ADMIN,ROLE_USER]" || elementAuthorities === "[ROLE_USER,ROLE_ADMIN]" ||
         elementAuthorities === "[ROLE_ADMIN, ROLE_USER]" || elementAuthorities === "[ROLE_USER, ROLE_ADMIN]"
     ) {
@@ -51,30 +50,15 @@ const headers = {
     'Content-Type': 'application/json;charset=utf-8'
 }
 
+async function editUser() {
 
-async function sendRequest() {
-    let id;
-    let name;
-    let pass;
-    let money;
-    let role;
+    let id = document.forms['editForm'].elements['inputId'].value;
+    let name = document.forms['editForm'].elements['inputName'].value;
+    let money = document.forms['editForm'].elements['inputMoney'].value;
+    let role = document.forms['editForm'].elements['select'].value;
+    let pass = document.forms['editForm'].elements['inputPassword'].value;
 
-    if (flag == "edit") {
-        urlForFetch = "/admin/update";
-        id = document.forms['editForm'].elements['inputId'].value;
-        name = document.forms['editForm'].elements['inputName'].value;
-        pass = document.forms['editForm'].elements['inputPassword'].value;
-        money = document.forms['editForm'].elements['inputMoney'].value;
-        role = document.forms['editForm'].elements['select'].value;
-    } else if (flag == "delete") {
-        urlForFetch = "/admin/delete";
-        id = document.forms['deleteForm'].elements['inputIdDelete'].value;
-        name = document.forms['deleteForm'].elements['inputNameDelete'].value;
-        pass = document.forms['deleteForm'].elements['inputPasswordDelete'].value;
-        money = document.forms['deleteForm'].elements['inputMoneyDelete'].value;
-        role = document.forms['deleteForm'].elements['selectDelete'].value;
-    }
-    let rawResponseEdit = await fetch(urlForFetch,
+    let rawResponseEdit = await fetch("/admin/update",
         {
             method: "POST",
             headers: {
@@ -104,8 +88,8 @@ async function sendRequest() {
             for (let i = 0; i < users.length; i++) {
 
                 for (let j = 0; j < users[i].role.length; j++) {
-                    let roleElement= users[i].role[j]['authority'];
-                        resultRole.push(roleElement) ;
+                    let roleElement = users[i].role[j]['authority'];
+                    resultRole.push(roleElement);
                 }
 
                 $('#showAllUserForm tbody').append(`<tr>
@@ -113,7 +97,88 @@ async function sendRequest() {
                                                             <td>${users[i].name}</td>\n" +
                                                             <td> ${users[i].money}</td>
                                                            <td>${resultRole}</td>
-<!--                    ediiiiit      deletteeeeeeeeeee-->
+<!--                    ediiiiit      -->
+                                                           <td>
+                    
+                                                                <button type="submit\"
+                                                                       class="btn btn-info btn-md" data-toggle="modal"
+                                                                        data-target="#ModalEdit"
+                                                                      data-name="${users[i].name}"
+                                                                        data-money="${users[i].money}"
+                                                                        data-authorities=[${resultRole}]
+                                                                        data-id="${users[i].id}"
+                                                                       data-flag="edit"
+                                                                                       >Edit</button>
+                    
+                                                          </td>
+                                                          <td>
+                    
+                                                               <button type="submit"
+                                                                        class="btn btn-danger btn-md" data-toggle="modal"
+                                                                       data-target="#ModalDelete"
+                                                                        data-name="${users[i].name}"
+                                                                       data-money="${users[i].money}"
+                                                                        data-authorities=[${resultRole}]
+                                                                        data-id="${users[i].id} "
+                                                                       data-flag="delete"
+                                                                                       >Delete</button>
+                    
+                                                            </td>
+                                                        </tr>`);
+
+                resultRole = [];
+            }
+        });
+};
+
+async function deleteUser() {
+
+    let id = document.forms['editForm'].elements['inputId'].value;
+    let name = document.forms['editForm'].elements['inputName'].value;
+    let pass = document.forms['editForm'].elements['inputPassword'].value;
+    let money = document.forms['editForm'].elements['inputMoney'].value;
+    let role = document.forms['editForm'].elements['select'].value;
+
+    let rawResponseEdit = await fetch("/admin/delete",
+        {
+            method: "POST",
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id: id,
+                name: name,
+                password: pass,
+                money: money,
+                role: [role]
+            }),
+        })
+        .then(function (response) {
+
+            console.log(response);
+            return response.json();
+        })
+        .then(function (data) {
+
+
+            $("#showAllUserForm tbody > tr").empty();
+
+            let users = data;
+            let resultRole = [];
+            for (let i = 0; i < users.length; i++) {
+
+                for (let j = 0; j < users[i].role.length; j++) {
+                    let roleElement = users[i].role[j]['authority'];
+                    resultRole.push(roleElement);
+                }
+
+                $('#showAllUserForm tbody').append(`<tr>
+                                                            <td>${users[i].id}</td>\n" +
+                                                            <td>${users[i].name}</td>\n" +
+                                                            <td> ${users[i].money}</td>
+                                                           <td>${resultRole}</td>
+<!--                        deletteeeeeeeeeee-->
                                                            <td>
                     
                                                                 <button type="submit\"
@@ -185,8 +250,8 @@ async function addNewUser() {
             for (let i = 0; i < users.length; i++) {
 
                 for (let j = 0; j < users[i].role.length; j++) {
-                    let roleElement= users[i].role[j]['authority'];
-                    resultRole.push(roleElement) ;
+                    let roleElement = users[i].role[j]['authority'];
+                    resultRole.push(roleElement);
                 }
 
                 $('#showAllUserForm tbody').append(`
@@ -225,7 +290,8 @@ async function addNewUser() {
                                      </tr>                                    
                                   `);
 
-                resultRole = [];;
+                resultRole = [];
+                ;
             }
         });
     $('#togglePaneAdminPanelShow').tab('show');
