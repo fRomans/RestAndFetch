@@ -13,7 +13,7 @@ import java.util.Set;
 @Component
 public class UserService  {
 
-    private UserRepos userRepos;
+    private final UserRepos userRepos;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
@@ -37,8 +37,7 @@ public class UserService  {
 
     public String UserPasswEncoderService(String password) {
 
-        String hashedPassword = passwordEncoder.encode(password);
-        return hashedPassword;
+        return passwordEncoder.encode(password);
     }
 
 
@@ -60,11 +59,5 @@ public class UserService  {
         return user;
     }
 
-    public User findByIdService(Long id) {
-
-        User userEdit = userRepos.findById(id).get();
-
-        return userEdit;
-    }
 
 }

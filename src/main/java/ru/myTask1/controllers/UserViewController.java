@@ -7,12 +7,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import ru.myTask1.domain.Role;
 import ru.myTask1.domain.User;
 import ru.myTask1.service.UserService;
-
-import java.util.Set;
 
 
 @Controller
@@ -26,16 +22,12 @@ public class UserViewController {
     }
 
     @GetMapping("/user")
-    public String getUserPage(@ModelAttribute User user, Authentication authentication, Model model) {
+    public String getUserPage(Authentication authentication, Model model) {
 
         //берем данные регистрации и аутентификации при входе user-a
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         User myUser = userService.findByUserName(userDetails.getUsername());
-        user.setName(myUser.getUsername());
-        user.setRoles((Set<Role>) myUser.getAuthorities());
-        user.setId(myUser.getId());
-        user.setMoney(myUser.getMoney());
-        model.addAttribute("user", user);
+        model.addAttribute("user", myUser);
         return "user";
     }
 }

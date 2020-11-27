@@ -3,7 +3,6 @@ let urlForFetch;
 $('#ModalEdit').on('show.bs.modal', function (event) {
     let elementId = $(event.relatedTarget).data('id');
     let elementName = $(event.relatedTarget).data('name');
-    let elementPassword = $(event.relatedTarget).data('password');
     let elementMoney = $(event.relatedTarget).data('money');
     let elementAuthorities = $(event.relatedTarget).data('authorities');
     flag = $(event.relatedTarget).data('flag');
@@ -21,7 +20,6 @@ $('#ModalEdit').on('show.bs.modal', function (event) {
 
     $("#inputName").val(elementName);
     $("#inputId").val(elementId);
-    // $("#inputPassword").val(elementPassword); не надо выводить пароль
     $("#inputMoney").val(elementMoney);
 });
 
@@ -133,26 +131,16 @@ async function editUser() {
 
 async function deleteUser() {
 
-    let id = document.forms['editForm'].elements['inputId'].value;
-    let name = document.forms['editForm'].elements['inputName'].value;
-    let pass = document.forms['editForm'].elements['inputPassword'].value;
-    let money = document.forms['editForm'].elements['inputMoney'].value;
-    let role = document.forms['editForm'].elements['select'].value;
+    let id = document.forms['deleteForm'].elements['inputIdDelete'].value;
 
-    let rawResponseEdit = await fetch("/admin/delete",
+    let rawResponseEdit = await fetch("/admin/delete/" + id,
         {
             method: "POST",
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                id: id,
-                name: name,
-                password: pass,
-                money: money,
-                role: [role]
-            }),
+            }
+
         })
         .then(function (response) {
 
@@ -211,7 +199,6 @@ async function deleteUser() {
             }
         });
 };
-
 
 async function addNewUser() {
 

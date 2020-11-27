@@ -1,10 +1,7 @@
 package ru.myTask1.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.myTask1.DTO.UserDTO;
 import ru.myTask1.domain.Role;
 import ru.myTask1.domain.User;
@@ -32,13 +29,6 @@ public class RestAdminController extends HttpServlet {
     }
 
 
-//    @PostMapping  //url показа usera  в приложении(может не совпадать с url запуска сервера)
-//    public List<User> getIndex(@ModelAttribute User user, Authentication authentication, Model model) {
-//        List<User> users = userService.findAllService();
-//        model.addAttribute("users", users);
-//
-//        return users;
-//    }
 
     @PostMapping(value = "/update")
     public List<UserDTO> getUpdateUser(@RequestBody UserDTO userDTO) {
@@ -50,11 +40,9 @@ public class RestAdminController extends HttpServlet {
         return usersDTO;
     }
 
-    @PostMapping(value = "/delete")
-    public List<UserDTO> getDeleteUser(@RequestBody UserDTO userDTO) {
+    @PostMapping(value = "/delete/{id}")
+    public List<UserDTO> getDeleteUser(@PathVariable Long id) {
 
-        User user = userConverter.dtoToEntity(userDTO);
-        Long id = user.getId();
         userService.deleteByIdService(id);
         List<User> users = userService.findAllService();
         List<UserDTO> usersDTO = userConverter.entityToDto(users);
