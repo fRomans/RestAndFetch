@@ -3,22 +3,28 @@ package ru.myTask1.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-
-import javax.sql.DataSource;
+import ru.myTask1.service.UserServiceImpl;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+//    @Autowired
+//    private DataSource dataSource;
+
+    private UserServiceImpl UserServiceImpl;
+
     @Autowired
-    private DataSource dataSource;
+    public void setUserService(UserServiceImpl UserServiceImpl) {
+        this.UserServiceImpl = UserServiceImpl;
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -61,19 +67,27 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.jdbcAuthentication()
-                .dataSource(dataSource)
-                .passwordEncoder(delegatingPasswordEncoder())
-                .usersByUsernameQuery("select name,password,money from usersSS where name=?")
-                .authoritiesByUsernameQuery("select u.name, r.role from usersSS u inner join users_roles ur inner join roless r on u.id=user_id and r.id=role_id where u.name=?");
-
-    }
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.jdbcAuthentication()
+//                .dataSource(dataSource)
+//                .passwordEncoder(delegatingPasswordEncoder())
+//                .usersByUsernameQuery("select name,password,money from usersSS where name=?")
+//                .authoritiesByUsernameQuery("select u.name, r.role from usersSS u inner join users_roles ur inner join roless r on u.id=user_id and r.id=role_id where u.name=?");
+//
+//    }
     @Bean
     public PasswordEncoder delegatingPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+
+    @Bean
+    public DaoAuthenticationProvider daoAuthenticationProvider() {
+        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+        authenticationProvider.setPasswordEncoder(delegatingPasswordEncoder());
+        authenticationProvider.setUserDetailsService(UserServiceImpl);
+        return authenticationProvider;
+    }
 
 }

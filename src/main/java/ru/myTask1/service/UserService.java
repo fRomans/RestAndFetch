@@ -1,63 +1,34 @@
 package ru.myTask1.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import ru.myTask1.domain.Role;
 import ru.myTask1.domain.User;
-import ru.myTask1.repos.UserRepos;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-@Component
-public class UserService  {
+public interface UserService {
 
-    private final UserRepos userRepos;
-    private final PasswordEncoder passwordEncoder;
+     List<User> findAllService();
 
-    @Autowired
-    public UserService(PasswordEncoder passwordEncoder, UserRepos userRepos) {
-        this.passwordEncoder = passwordEncoder;
-        this.userRepos = userRepos;
-    }
+     void saveService(User user) ;
+
+     void deleteByIdService(Long id);
+
+     String UserPasswEncoderService(String password) ;
 
 
-    public List<User> findAllService() {
-        return userRepos.findAll();
-    }
+     User UserUpdateService(User user, Set<Role> role) ;
 
-    public void saveService(User user) {
-        userRepos.save(user);
-    }
-
-    public void deleteByIdService(Long id) {
-        userRepos.deleteById(id);
-    }
-
-    public String UserPasswEncoderService(String password) {
-
-        return passwordEncoder.encode(password);
-    }
+     User findByUserName(String username) ;
 
 
-    public User UserUpdateService(User user, Set<Role> role) {
-        Long idUser = user.getId();
-        User userUpdate = userRepos.findById(idUser).get();
-        userUpdate.setName(user.getUsername());
-        if (!user.getPassword().equals("")) {
-            userUpdate.setPassword(passwordEncoder.encode(user.getPassword()));
-        }
-        userUpdate.setMoney(user.getMoney());
-        userUpdate.setRoles(role);
-        userRepos.save(userUpdate);
-        return userUpdate;
-    }
 
-    public  User findByUserName(String username){
-        User user = userRepos.findByName(username);;
-        return user;
-    }
+     UserDetails loadUserByUsername(String username) throws UsernameNotFoundException ;
 
+     Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) ;
 
 }

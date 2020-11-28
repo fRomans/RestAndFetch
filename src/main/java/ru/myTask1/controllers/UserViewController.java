@@ -8,17 +8,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import ru.myTask1.domain.User;
-import ru.myTask1.service.UserService;
+import ru.myTask1.service.UserServiceImpl;
 
 
 @Controller
 public class UserViewController {
 
-    private final UserService userService;
+    private final UserServiceImpl setUserServiceImpl;
 
     @Autowired
-    public UserViewController(UserService userService) {
-        this.userService = userService;
+    public UserViewController(UserServiceImpl setUserServiceImpl) {
+        this.setUserServiceImpl = setUserServiceImpl;
     }
 
     @GetMapping("/user")
@@ -26,7 +26,7 @@ public class UserViewController {
 
         //берем данные регистрации и аутентификации при входе user-a
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        User myUser = userService.findByUserName(userDetails.getUsername());
+        User myUser = setUserServiceImpl.findByUserName(userDetails.getUsername());
         model.addAttribute("user", myUser);
         return "user";
     }

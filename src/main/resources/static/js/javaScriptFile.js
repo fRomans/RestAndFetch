@@ -265,12 +265,12 @@ async function addNewUser() {
 
                                         <button type="submit"
                                                   class="btn btn-danger btn-md" data-toggle="modal"
-                                                  data-target=\\"#ModalDelete\\"
+                                                  data-target="#ModalDelete"
                                                 data-name="${users[i].name}"
                                                 data-money="${users[i].money}" 
                                                 data-id="${users[i].id}"
                                                 data-authorities=[${resultRole}]
-                                                    data-flag="delete" 
+                                                   
                                         >Delete</button>
 
                                        </td>

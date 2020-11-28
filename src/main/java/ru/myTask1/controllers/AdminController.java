@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.myTask1.domain.User;
-import ru.myTask1.service.UserService;
+import ru.myTask1.service.UserServiceImpl;
 
 import javax.servlet.http.HttpServlet;
 import java.util.List;
@@ -18,17 +18,17 @@ import java.util.List;
 public class AdminController extends HttpServlet {
 
 
-    private final UserService userService;
+    private final UserServiceImpl UserServiceImpl;
 
 
     @Autowired
-    public AdminController(UserService userService) {
-        this.userService = userService;
+    public AdminController(UserServiceImpl UserServiceImpl) {
+        this.UserServiceImpl = UserServiceImpl;
     }
 
     @GetMapping  //url показа usera  в приложении(может не совпадать с url запуска сервера)
     public String getIndex(@ModelAttribute User user, Model model) {
-        List<User> users = userService.findAllService();
+        List<User> users = UserServiceImpl.findAllService();
         model.addAttribute("users", users);
         return "showUsers";
     }
