@@ -1,6 +1,7 @@
 package ru.myTask1.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +30,9 @@ public class AdminController extends HttpServlet {
     @GetMapping  //url показа usera  в приложении(может не совпадать с url запуска сервера)
     public String getIndex(@ModelAttribute User user, Model model) {
         List<User> users = UserServiceImpl.findAllService();
+        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
         model.addAttribute("users", users);
+        model.addAttribute("userName", userName);
         return "showUsers";
     }
 
