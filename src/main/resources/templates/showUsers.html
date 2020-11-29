@@ -32,7 +32,8 @@
         <ul class="nav nav-pills" role="tablist" id="ul">
             <li class="nav-item " id="li1"><a href="#idAdmin" class="nav-link active" role="tab" data-toggle="pill">Admin</a>
             </li>
-            <li class="nav-item" id="li2"><a href="#idUser" class="nav-link" role="tab" data-toggle="pill">User</a></li>
+            <li class="nav-item" id="li2"><a href="#idUser" class="nav-link " role="tab" data-toggle="pill"
+                                             th:if="${roleUser}">User</a></li>
 
         </ul>
     </div>
