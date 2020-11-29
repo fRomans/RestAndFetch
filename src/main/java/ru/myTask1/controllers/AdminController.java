@@ -34,6 +34,7 @@ public class AdminController extends HttpServlet {
                            Authentication authentication) {
         List<User> users = UserServiceImpl.findAllService();
         String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+        User userWithAdmin = UserServiceImpl.findByUserName(userName);
         boolean roleUser = false;
         for (GrantedAuthority role : authentication.getAuthorities()) {
             if (role.getAuthority().equals("ROLE_USER")) {
@@ -42,7 +43,7 @@ public class AdminController extends HttpServlet {
             }
 
         }
-
+        model.addAttribute("user", userWithAdmin);
         model.addAttribute("roleUser", roleUser);
         model.addAttribute("users", users);
         model.addAttribute("userName", userName);
